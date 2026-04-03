@@ -34,4 +34,4 @@ jobs:
           git config --local user.name "PLURIS Bot"
           git add data/news.json
           git diff --staged --quiet || git commit -m "🌍 Update news [$(date -u '+%Y-%m-%d %H:%M UTC')]"
-          git push
+          git pull --rebase && git push
