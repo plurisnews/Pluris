@@ -12,32 +12,21 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.GITHUB_TOKEN }}
+      - uses: actions/checkout@v4
 
-      - name: Setup Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
 
-      - name: Install dependencies
-        run: pip install anthropic
+      - run: pip install anthropic
 
       - name: Run news fetcher
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: python scripts/fetch_news.py
 
-      - name: Commit updated news data
-        run: |
-          git config --local user.email "pluris-bot@users.noreply.github.com"
-          git config --local user.name "PLURIS Bot"
-          git fetch origin main
-          git reset --soft origin/main
-          git add data/news.json
-          git diff --staged --quiet && echo "No changes" && exit 0
-          git commit -m "🌍 Update news [$(date -u '+%Y-%m-%d %H:%M UTC')]"
-          git push origin main
+      - name: Push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: "🌍 Update news"
+          file_pattern: data/news.json
