@@ -485,8 +485,9 @@ def main():
     print(f"{'='*50}\n")
 
     # Carica news precedenti per evitare duplicati
-    output_path = os.path.join(os.path.dirname(__file__), "../data/news.json")
-    existing_ids = set()
+output_path = os.path.join(os.path.dirname(__file__), "../public/data/news.json")
+os.makedirs(os.path.dirname(output_path), exist_ok=True)
+existing_ids = set()
     if os.path.exists(output_path):
         try:
             with open(output_path) as f:
