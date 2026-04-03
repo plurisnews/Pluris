@@ -1,5 +1,525 @@
 {
-  "updated": "never",
-  "total_articles": 0,
-  "stories": {}
+  "updated": "2026-04-03T10:27:39.526173+00:00",
+  "total_articles": 180,
+  "stories": {
+    "trade": {
+      "id": "trade",
+      "topic": "trade",
+      "icon": "⚖️",
+      "category": {
+        "en": "TRADE WAR",
+        "it": "GUERRA COMMERCIALE",
+        "fr": "GUERRE COMMERCIALE",
+        "de": "HANDELSKRIEG",
+        "es": "GUERRA COMERCIAL",
+        "zh": "贸易战"
+      },
+      "headline": {
+        "en": "Global perspectives on: Trade",
+        "it": "Prospettive globali su: trade",
+        "fr": "Perspectives mondiales sur: trade",
+        "de": "Weltweite Perspektiven zu: trade",
+        "es": "Perspectivas globales sobre: trade",
+        "zh": "全球视角：trade"
+      },
+      "summary": {
+        "en": "6 perspectives from 6 countries.",
+        "it": "6 prospettive da 6 paesi.",
+        "fr": "6 perspectives de 6 pays.",
+        "de": "6 Perspektiven aus 6 Ländern.",
+        "es": "6 perspectivas de 6 países.",
+        "zh": "来自6个国家的6种视角。"
+      },
+      "cards": [
+        {
+          "id": "856cdf5394",
+          "country": "es",
+          "flag": "🇪🇸",
+          "source": "El Mundo — Internacional",
+          "headline": "La arquitectura de la supervivencia: por qué la República Islámica no colapsa",
+          "excerpt": "Si las herramientas  para debilitar al sistema están contribuyendo a reforzarlo, insistir es una forma de perpetuar el problema bajo otra apariencia&nbsp;Leer",
+          "link": "https://www.elmundo.es/internacional/2026/04/03/69ce570afdddff33338b4576.html",
+          "time": "Fri, 03 Apr 2026 00:05:57 +0200",
+          "original": "ES",
+          "sentiment": "neutral",
+          "sentLabel": "ANALYSIS",
+          "translated": {}
+        },
+        {
+          "id": "b341aa9c47",
+          "country": "uk",
+          "flag": "🇬🇧",
+          "source": "BBC World",
+          "headline": "Trump removes US Attorney General Pam Bondi",
+          "excerpt": "Bondi's time as top US law enforcement officer was overshadowed by her handling of the Epstein files.",
+          "link": "https://www.bbc.com/news/articles/ce843ge47z4o?at_medium=RSS&at_campaign=rss",
+          "time": "Fri, 03 Apr 2026 00:31:27 GMT",
+          "original": "EN",
+          "sentiment": "neutral",
+          "sentLabel": "ANALYSIS",
+          "translated": {}
+        },
+        {
+          "id": "ddb218e37d",
+          "country": "usa",
+          "flag": "🇺🇸",
+          "source": "Foreign Policy",
+          "headline": "How China Reinvented the BRI",
+          "excerpt": "Western tariffs accelerated its transformation into a sophisticated extension of China’s industrial policy.",
+          "link": "https://foreignpolicy.com/2026/04/03/china-belt-and-road-initiative-reinvention-trade/",
+          "time": "Fri, 03 Apr 2026 04:01:30 +0000",
+          "original": "EN",
+          "sentiment": "neutral",
+          "sentLabel": "ANALYSIS",
+          "translated": {}
+        },
+        {
+          "id": "4b18939357",
+          "country": "fr",
+          "flag": "🇫🇷",
+          "source": "Le Monde — International",
+          "headline": "La chute de Pam Bondi, la procureure générale des Etats-Unis, malgré le zèle avec lequel elle aura servi Donald Trump",
+          "excerpt": "La ministre de la justice paie, notamment, sa mauvaise gestion de l’affaire Epstein. Elle sera remplacée à titre provisoire par son numéro deux, Todd Blanche, ancien avocat personnel du président américain.",
+          "link": "https://www.lemonde.fr/international/article/2026/04/03/la-chute-de-pam-bondi-la-procureure-generale-des-etats-unis-malgre-son-zele-au-service-de-donald-trump_6676307_3210.html",
+          "time": "Fri, 03 Apr 2026 05:29:17 +0200",
+          "original": "FR",
+          "sentiment": "neutral",
+          "sentLabel": "ANALYSIS",
+          "translated": {}
+        },
+        {
+          "id": "6fc12a64fa",
+          "country": "cn",
+          "flag": "🇨🇳",
+          "source": "South China Morning Post",
+          "headline": "Beijing hails US cooperation as ICE returns suspected drug smuggler to China",
+          "excerpt": "A Chinese fugitive suspected of drug-related crimes has been repatriated from the United States and handed to police in China, the first such case in years, according to state media.\nThe suspect was returned to China by US Immigration and Customs Enforcement (ICE) via cooperation channels between the two countries, based on information provided by Chinese narcotics control authorities, state news ",
+          "link": "https://www.scmp.com/news/china/diplomacy/article/3348926/beijing-hails-us-cooperation-ice-returns-suspected-drug-smuggler-china?utm_source=rss_feed",
+          "time": "Fri, 03 Apr 2026 08:00:11 +0000",
+          "original": "EN",
+          "sentiment": "positive",
+          "sentLabel": "POSITIVE",
+          "translated": {}
+        },
+        {
+          "id": "a7f59226bc",
+          "country": "de",
+          "flag": "🇩🇪",
+          "source": "Der Spiegel — Ausland",
+          "headline": "Pete Hegseth: US-Verteidigungsminister wirft Heereschef Randy George raus",
+          "excerpt": "Pete Hegseth wirft den nächsten Topoffizier raus aus den US-Streitkräften. Dieses Mal trifft es Heereschef Randy George, der im Irak und in Afghanistan gedient hatte.",
+          "link": "https://www.spiegel.de/ausland/us-verteidigungsminister-pete-hegseth-wirft-heereschef-randy-george-raus-a-f743a0de-eab7-42c2-bc0b-1fd48466e2cc#ref=rss",
+          "time": "Fri, 3 Apr 2026 01:47:00 +0200",
+          "original": "DE",
+          "sentiment": "neutral",
+          "sentLabel": "ANALYSIS",
+          "translated": {}
+        }
+      ]
+    },
+    "ukraine": {
+      "id": "ukraine",
+      "topic": "ukraine",
+      "icon": "🕊️",
+      "category": {
+        "en": "UKRAINE WAR",
+        "it": "GUERRA IN UCRAINA",
+        "fr": "GUERRE EN UKRAINE",
+        "de": "UKRAINE-KRIEG",
+        "es": "GUERRA EN UCRANIA",
+        "zh": "乌克兰战争"
+      },
+      "headline": {
+        "en": "Global perspectives on: Ukraine",
+        "it": "Prospettive globali su: ukraine",
+        "fr": "Perspectives mondiales sur: ukraine",
+        "de": "Weltweite Perspektiven zu: ukraine",
+        "es": "Perspectivas globales sobre: ukraine",
+        "zh": "全球视角：ukraine"
+      },
+      "summary": {
+        "en": "6 perspectives from 6 countries.",
+        "it": "6 prospettive da 6 paesi.",
+        "fr": "6 perspectives de 6 pays.",
+        "de": "6 Perspektiven aus 6 Ländern.",
+        "es": "6 perspectivas de 6 países.",
+        "zh": "来自6个国家的6种视角。"
+      },
+      "cards": [
+        {
+          "id": "dab6b7e5f5",
+          "country": "es",
+          "flag": "🇪🇸",
+          "source": "El Mundo — Internacional",
+          "headline": "Destituyen al jefe del Estado Mayor del Ejército de EEUU en plena guerra de Irán",
+          "excerpt": "Randy George, encargado de organizar las fuerzas de tierra del Ejército estadounidense, ha sido cesado de su cargo por el secretario de Guerra, Pete Hegseth&nbsp;Leer",
+          "link": "https://www.elmundo.es/internacional/2026/04/03/69cef218fc6c83dc4a8b45a1.html",
+          "time": "Fri, 03 Apr 2026 00:49:12 +0200",
+          "original": "ES",
+          "sentiment": "alarm",
+          "sentLabel": "ALERT",
+          "translated": {}
+        },
+        {
+          "id": "7df0079b0f",
+          "country": "cn",
+          "flag": "🇨🇳",
+          "source": "South China Morning Post",
+          "headline": "With an eye on China, Japan looks to kamikaze drones and low-cost missiles",
+          "excerpt": "Japan plans to introduce a fleet of kamikaze drones and low-cost missiles to boost deterrence against regional threats including China, according to Japanese media reports.\nThe Yomiuri newspaper and Kyodo news agency reported on Wednesday that the strategy was focused on “integrated attacks” from unmanned aerial vehicles and long-range stand-off missiles, citing government and ruling coalition sou",
+          "link": "https://www.scmp.com/news/china/military/article/3348960/eye-china-japan-looks-kamikaze-drones-and-low-cost-missiles?utm_source=rss_feed",
+          "time": "Fri, 03 Apr 2026 10:00:23 +0000",
+          "original": "EN",
+          "sentiment": "neutral",
+          "sentLabel": "ANALYSIS",
+          "translated": {}
+        },
+        {
+          "id": "47eb84a627",
+          "country": "fr",
+          "flag": "🇫🇷",
+          "source": "Le Figaro — International",
+          "headline": "« Un moment et des cibles parfaitement choisis » : en parallèle de la guerre au Moyen-Orient, l’Ukraine frappe les installations pétrolières russes",
+          "excerpt": "DÉCRYPTAGE - Kiev concentre ses attaques de drones sur les ports russes, entraînant pour Moscou la perte d’environ 40 % de ses exportations d’or noir.",
+          "link": "https://www.lefigaro.fr/international/un-moment-et-des-cibles-parfaitement-choisis-en-parallele-de-la-guerre-au-moyen-orient-l-ukraine-frappe-les-installations-petrolieres-russes-20260402",
+          "time": "Fri, 03 Apr 2026 11:15:07 +0200",
+          "original": "FR",
+          "sentiment": "neutral",
+          "sentLabel": "ANALYSIS",
+          "translated": {}
+        },
+        {
+          "id": "c3ec45f644",
+          "country": "uk",
+          "flag": "🇬🇧",
+          "source": "The Economist",
+          "headline": "Can Ukraine help defeat Iran’s drone swarms?",
+          "excerpt": "Thousands of Shaheds are raining down on the Gulf",
+          "link": "https://www.economist.com/international/2026/03/06/can-ukraine-help-defeat-irans-drone-swarms",
+          "time": "Fri, 06 Mar 2026 19:44:22 +0000",
+          "original": "EN",
+          "sentiment": "alarm",
+          "sentLabel": "ALERT",
+          "translated": {}
+        },
+        {
+          "id": "668fc42553",
+          "country": "de",
+          "flag": "🇩🇪",
+          "source": "Der Spiegel — Ausland",
+          "headline": "Iran-Krieg: Johann Wadephul besorgt über Nato-Austrittsdrohung von Donald Trump",
+          "excerpt": "Außenminister Johann Wadephul zeigt sich angesichts der Äußerungen von US-Präsident Donald Trump zu einem Austritt aus der Nato beunruhigt. Und: Trump droht Iran, weitere Brücken und Kraftwerke zu zerstören. Der Überblick.",
+          "link": "https://www.spiegel.de/ausland/krieg-in-nahost-johann-wadephul-besorgt-ueber-nato-austrittsdrohung-von-donald-trump-a-09cd283c-3d08-4cb8-ac91-36913cfe2145#ref=rss",
+          "time": "Fri, 3 Apr 2026 09:37:00 +0200",
+          "original": "DE",
+          "sentiment": "alarm",
+          "sentLabel": "ALERT",
+          "translated": {}
+        },
+        {
+          "id": "ffdcf9deab",
+          "country": "usa",
+          "flag": "🇺🇸",
+          "source": "Foreign Policy",
+          "headline": "Nepal’s New Leaders Go on the Offensive",
+          "excerpt": "Former officials were arrested over the weekend in connection with a crackdown on protesters last year.",
+          "link": "https://foreignpolicy.com/2026/04/01/nepal-new-government-shah-sharma-oli-arrest-reform/",
+          "time": "Wed, 01 Apr 2026 20:38:36 +0000",
+          "original": "EN",
+          "sentiment": "neutral",
+          "sentLabel": "ANALYSIS",
+          "translated": {}
+        }
+      ]
+    },
+    "mideast": {
+      "id": "mideast",
+      "topic": "mideast",
+      "icon": "🌙",
+      "category": {
+        "en": "MIDDLE EAST",
+        "it": "MEDIO ORIENTE",
+        "fr": "MOYEN-ORIENT",
+        "de": "NAHER OSTEN",
+        "es": "ORIENTE MEDIO",
+        "zh": "中东"
+      },
+      "headline": {
+        "en": "Global perspectives on: Mideast",
+        "it": "Prospettive globali su: mideast",
+        "fr": "Perspectives mondiales sur: mideast",
+        "de": "Weltweite Perspektiven zu: mideast",
+        "es": "Perspectivas globales sobre: mideast",
+        "zh": "全球视角：mideast"
+      },
+      "summary": {
+        "en": "6 perspectives from 6 countries.",
+        "it": "6 prospettive da 6 paesi.",
+        "fr": "6 perspectives de 6 pays.",
+        "de": "6 Perspektiven aus 6 Ländern.",
+        "es": "6 perspectivas de 6 países.",
+        "zh": "来自6个国家的6种视角。"
+      },
+      "cards": [
+        {
+          "id": "904138945f",
+          "country": "uk",
+          "flag": "🇬🇧",
+          "source": "The Guardian — World",
+          "headline": "A day in the life of Asia’s fuel crisis",
+          "excerpt": "From farms in New Zealand to factories in Delhi, the effects of the oil crisis triggered by the Iran war are rippling across Asia Continue reading...",
+          "link": "https://www.theguardian.com/world/2026/apr/03/asia-fuel-crisis-iran-war-ordinary-workers",
+          "time": "Fri, 03 Apr 2026 04:00:42 GMT",
+          "original": "EN",
+          "sentiment": "alarm",
+          "sentLabel": "ALERT",
+          "translated": {}
+        },
+        {
+          "id": "3df714cf81",
+          "country": "fr",
+          "flag": "🇫🇷",
+          "source": "Le Monde — International",
+          "headline": "Nucléaire iranien : la menace d’un régime radicalisé et lancé dans une course vers la bombe",
+          "excerpt": "Donald Trump semble envisager de mettre fin à la guerre contre Téhéran sans régler la question du nucléaire. Or, loin d’avoir mis fin aux ambitions de la République islamique, le conflit a rendu plus opaque encore son programme nucléaire et attisé la volonté de ses nouveaux dirigeants de se doter de l’arme atomique.",
+          "link": "https://www.lemonde.fr/international/article/2026/04/03/nucleaire-iranien-la-menace-d-un-regime-radicalise-lance-dans-une-course-vers-la-bombe_6676324_3210.html",
+          "time": "Fri, 03 Apr 2026 06:00:45 +0200",
+          "original": "FR",
+          "sentiment": "neutral",
+          "sentLabel": "ANALYSIS",
+          "translated": {}
+        },
+        {
+          "id": "af06502960",
+          "country": "cn",
+          "flag": "🇨🇳",
+          "source": "South China Morning Post",
+          "headline": "Work from home, but we’re watching: Indonesia, Malaysia geo-track remote civil servants",
+          "excerpt": "Indonesia and Malaysia have ordered civil servants to work from home to save fuel amid the Iran war but with digital surveillance measures far stricter than those used during the pandemic.\nCivil servants in Indonesia must activate location tracking and respond to work communications within five minutes. Their Malaysian counterparts must log into a geolocation monitoring system every hour. Those wh",
+          "link": "https://www.scmp.com/week-asia/politics/article/3348946/work-home-were-watching-indonesia-malaysia-geo-track-remote-civil-servants?utm_source=rss_feed",
+          "time": "Fri, 03 Apr 2026 08:44:40 +0000",
+          "original": "EN",
+          "sentiment": "neutral",
+          "sentLabel": "ANALYSIS",
+          "translated": {}
+        },
+        {
+          "id": "bbaa2bb849",
+          "country": "de",
+          "flag": "🇩🇪",
+          "source": "Der Spiegel — Ausland",
+          "headline": "Straße von Hormus: Rund 40 Staaten fordern Öffnung",
+          "excerpt": "Irans Blockade der Straße von Hormus hat eine weltweite Energiekrise ausgelöst. Dutzende Staaten verlangen nun von Teheran, die »Freiheit der Schifffahrt« zu achten. Konkrete Maßnahmen gegen das Regime beschlossen sie jedoch nicht.",
+          "link": "https://www.spiegel.de/ausland/rund-40-staaten-fordern-oeffnung-der-strasse-von-hormus-a-403e2333-5b76-4bea-82f7-e0fff47031dc#ref=rss",
+          "time": "Fri, 3 Apr 2026 01:05:00 +0200",
+          "original": "DE",
+          "sentiment": "neutral",
+          "sentLabel": "ANALYSIS",
+          "translated": {}
+        },
+        {
+          "id": "30bf990ee0",
+          "country": "es",
+          "flag": "🇪🇸",
+          "source": "El País — Internacional",
+          "headline": "Una campaña internacional trata de salvar de la ejecución a un joven iraní de la minoría bahaí",
+          "excerpt": "Peyvand Naeimi, capturado en enero durante las manifestaciones contra el régimen, ha sido sometido a ejecuciones simuladas y tortura y forma parte de una religión perseguida desde la fundación de la República Islámica en 1979",
+          "link": "https://elpais.com/internacional/2026-04-02/una-campana-internacional-trata-de-salvar-de-la-ejecucion-a-un-joven-irani-de-la-minoria-bahai.html",
+          "time": "Thu, 02 Apr 2026 03:30:01 GMT",
+          "original": "ES",
+          "sentiment": "neutral",
+          "sentLabel": "ANALYSIS",
+          "translated": {}
+        },
+        {
+          "id": "27afcbbc1d",
+          "country": "usa",
+          "flag": "🇺🇸",
+          "source": "Foreign Policy",
+          "headline": "Is Germany’s Postwar Consensus on Israel in Peril?",
+          "excerpt": "The political left has become simultaneously more mainstream and more radical.",
+          "link": "https://foreignpolicy.com/2026/04/02/germany-israel-postwar-consensus/",
+          "time": "Thu, 02 Apr 2026 04:01:37 +0000",
+          "original": "EN",
+          "sentiment": "alarm",
+          "sentLabel": "ALERT",
+          "translated": {}
+        }
+      ]
+    },
+    "climate": {
+      "id": "climate",
+      "topic": "climate",
+      "icon": "🌍",
+      "category": {
+        "en": "CLIMATE",
+        "it": "CLIMA",
+        "fr": "CLIMAT",
+        "de": "KLIMA",
+        "es": "CLIMA",
+        "zh": "气候"
+      },
+      "headline": {
+        "en": "Global perspectives on: Climate",
+        "it": "Prospettive globali su: climate",
+        "fr": "Perspectives mondiales sur: climate",
+        "de": "Weltweite Perspektiven zu: climate",
+        "es": "Perspectivas globales sobre: climate",
+        "zh": "全球视角：climate"
+      },
+      "summary": {
+        "en": "3 perspectives from 2 countries.",
+        "it": "3 prospettive da 2 paesi.",
+        "fr": "3 perspectives de 2 pays.",
+        "de": "3 Perspektiven aus 2 Ländern.",
+        "es": "3 perspectivas de 2 países.",
+        "zh": "来自2个国家的3种视角。"
+      },
+      "cards": [
+        {
+          "id": "9cd8dca2a6",
+          "country": "fr",
+          "flag": "🇫🇷",
+          "source": "Le Monde — International",
+          "headline": "« Donald Trump rend un service involontaire, mais considérable, à la transition énergétique »",
+          "excerpt": "A la suite du choc pétrogazier mondial provoqué par l’attaque américaine sur l’Iran, le président des Etats-Unis s’est transformé en médecin du climat, accélérant la bascule des grandes économies vers les énergies décarbonées, décrypte l’économiste Patrice Geoffron, dans une tribune au « Monde ».",
+          "link": "https://www.lemonde.fr/idees/article/2026/04/03/donald-trump-rend-un-service-involontaire-mais-considerable-a-la-transition-energetique_6676339_3232.html",
+          "time": "Fri, 03 Apr 2026 10:00:08 +0200",
+          "original": "FR",
+          "sentiment": "neutral",
+          "sentLabel": "ANALYSIS",
+          "translated": {}
+        },
+        {
+          "id": "2f8aed53f7",
+          "country": "uk",
+          "flag": "🇬🇧",
+          "source": "The Guardian — World",
+          "headline": "Asia ramps up use of dirty fuels to cover energy shortfall triggered by Iran war",
+          "excerpt": "South Korea will delay the shutdown of coal-fired plants, while the Philippines also plans to boost the output of its coal-burning plantsGovernments across Asia are ramping up their use of coal, the dirtiest fossil fuel, as they try to cover huge energy shortfalls triggered by the US-Israel war on Iran.The move has triggered warnings from climate experts who point to coal’s devastating environment",
+          "link": "https://www.theguardian.com/world/2026/apr/01/iran-energy-crisis-asia-dirty-fuels-coal",
+          "time": "Wed, 01 Apr 2026 05:05:00 GMT",
+          "original": "EN",
+          "sentiment": "alarm",
+          "sentLabel": "ALERT",
+          "translated": {}
+        },
+        {
+          "id": "43cd806f5e",
+          "country": "fr",
+          "flag": "🇫🇷",
+          "source": "Le Figaro — International",
+          "headline": "Royaume-Uni : Tony Blair appelle la gauche à mettre fin à son «alliance contre-nature avec les islamistes»",
+          "excerpt": "Après, l’incendie criminel de quatre ambulances d’une association caritative juive, l’ancien premier ministre travailliste dénonce un climat général antisémite, nourri par les compromissions de son camp.",
+          "link": "https://www.lefigaro.fr/international/royaume-uni-tony-blair-appelle-la-gauche-a-mettre-fin-a-son-alliance-contre-nature-avec-les-islamistes-20260402",
+          "time": "Thu, 02 Apr 2026 10:59:31 +0200",
+          "original": "FR",
+          "sentiment": "neutral",
+          "sentLabel": "ANALYSIS",
+          "translated": {}
+        }
+      ]
+    },
+    "tech": {
+      "id": "tech",
+      "topic": "tech",
+      "icon": "💻",
+      "category": {
+        "en": "TECH RIVALRY",
+        "it": "RIVALITÀ TECH",
+        "fr": "RIVALITÉ TECHNOLOGIQUE",
+        "de": "TECH-RIVALITÄT",
+        "es": "RIVALIDAD TECNOLÓGICA",
+        "zh": "科技竞争"
+      },
+      "headline": {
+        "en": "Global perspectives on: Tech",
+        "it": "Prospettive globali su: tech",
+        "fr": "Perspectives mondiales sur: tech",
+        "de": "Weltweite Perspektiven zu: tech",
+        "es": "Perspectivas globales sobre: tech",
+        "zh": "全球视角：tech"
+      },
+      "summary": {
+        "en": "5 perspectives from 3 countries.",
+        "it": "5 prospettive da 3 paesi.",
+        "fr": "5 perspectives de 3 pays.",
+        "de": "5 Perspektiven aus 3 Ländern.",
+        "es": "5 perspectivas de 3 países.",
+        "zh": "来自3个国家的5种视角。"
+      },
+      "cards": [
+        {
+          "id": "9e0172ed47",
+          "country": "fr",
+          "flag": "🇫🇷",
+          "source": "Le Figaro — International",
+          "headline": "« Le suivre, c’est l’attendre » : quand Emmanuel Macron agace par ses retards au Japon, sanctuaire de la ponctualité",
+          "excerpt": "RÉCIT - Ces derniers jours, la visite du chef d’État français dans l’archipel a été marquée par des petits retards, qui ont été remarqués dans un pays où le respect de la ponctualité est un pilier de la culture nationale.",
+          "link": "https://www.lefigaro.fr/international/le-suivre-c-est-l-attendre-quand-emmanuel-macron-agace-par-ses-retards-au-japon-sanctuaire-de-la-ponctualite-20260403",
+          "time": "Fri, 03 Apr 2026 11:53:25 +0200",
+          "original": "FR",
+          "sentiment": "neutral",
+          "sentLabel": "ANALYSIS",
+          "translated": {}
+        },
+        {
+          "id": "51a0c0ddfe",
+          "country": "cn",
+          "flag": "🇨🇳",
+          "source": "Global Times",
+          "headline": "China stresses Taiwan at 'core of core interests' after Xi-Trump call; Room for 'relying on US for independence' illusion will only shrink further: expert",
+          "excerpt": "Read the full article at source.",
+          "link": "https://www.globaltimes.cn/page/202602/1354899.shtml",
+          "time": "Fri, 06 Feb 2026 00:00:00 GMT",
+          "original": "EN",
+          "sentiment": "neutral",
+          "sentLabel": "ANALYSIS",
+          "translated": {}
+        },
+        {
+          "id": "9d396d3927",
+          "country": "usa",
+          "flag": "🇺🇸",
+          "source": "The Atlantic — World",
+          "headline": "The Worst-Case Scenario for AI and the News Is Already Here",
+          "excerpt": "Audiovisual evidence is no match for a viral conspiracy theory that Benjamin Netanyahu is dead.",
+          "link": "https://www.theatlantic.com/international/2026/03/netanyahu-not-dead-israel-ai/686593/?utm_source=feed",
+          "time": "recently",
+          "original": "EN",
+          "sentiment": "neutral",
+          "sentLabel": "ANALYSIS",
+          "translated": {}
+        },
+        {
+          "id": "1a856c144c",
+          "country": "cn",
+          "flag": "🇨🇳",
+          "source": "Global Times",
+          "headline": "Nearly 4.9 million visits from Taiwan to mainland in 2025 with one-third made by young people: CPPCC member",
+          "excerpt": "Read the full article at source.",
+          "link": "https://www.globaltimes.cn/page/202603/1356809.shtml",
+          "time": "Thu, 12 Mar 2026 00:00:00 GMT",
+          "original": "EN",
+          "sentiment": "neutral",
+          "sentLabel": "ANALYSIS",
+          "translated": {}
+        },
+        {
+          "id": "32d7df3256",
+          "country": "cn",
+          "flag": "🇨🇳",
+          "source": "Global Times",
+          "headline": "Chinese courts step up crackdown on cyber crimes",
+          "excerpt": "Read the full article at source.",
+          "link": "https://www.globaltimes.cn/page/202603/1356678.shtml",
+          "time": "Tue, 10 Mar 2026 00:00:00 GMT",
+          "original": "EN",
+          "sentiment": "neutral",
+          "sentLabel": "ANALYSIS",
+          "translated": {}
+        }
+      ]
+    }
+  }
 }
