@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GEOSCOPE — World Perspectives</title>
+<meta name="description" content="Same geopolitical story, six national perspectives. US, UK, French, German, Spanish and Chinese press — compared in real time.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0a0c10; --bg2:#111318; --bg3:#1a1d24; --border:#252830;
+  --accent:#e8c84a; --accent2:#4a8fe8;
+  --text:#e8eaf0; --text2:#8a8fa0; --text3:#555a6a;
+  --radius:8px;
+  --mono:'DM Mono',monospace; --serif:'Playfair Display',serif; --sans:'DM Sans',sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);min-height:100vh;overflow-x:hidden;}
+
+/* ── TOPBAR ── */
+.topbar{background:var(--bg);border-bottom:1px solid var(--border);padding:0 32px;display:flex;align-items:center;justify-content:space-between;height:52px;position:sticky;top:0;z-index:100;}
+.logo{font-family:var(--serif);font-size:22px;font-weight:900;color:var(--text);display:flex;align-items:center;gap:10px;}
+.logo-dot{width:8px;height:8px;background:var(--accent);border-radius:50%;animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(.8);}}
+.topbar-right{display:flex;align-items:center;gap:16px;}
+.lang-switcher{display:flex;gap:3px;background:var(--bg3);border-radius:6px;padding:3px;}
+.lang-btn{font-family:var(--mono);font-size:11px;padding:4px 10px;border:none;background:none;color:var(--text2);border-radius:4px;cursor:pointer;transition:all .2s;font-weight:500;}
+.lang-btn.active{background:var(--accent);color:#000;}
+.live-badge{font-family:var(--mono);font-size:10px;color:var(--accent);border:1px solid var(--accent);padding:3px 8px;border-radius:3px;letter-spacing:1px;display:flex;align-items:center;gap:5px;}
+.live-dot{width:5px;height:5px;background:var(--accent);border-radius:50%;animation:pulse 1.2s infinite;}
+
+/* ── TICKER ── */
+.ticker{background:var(--bg2);border-bottom:1px solid var(--border);padding:8px 0;overflow:hidden;display:flex;align-items:center;}
+.ticker-label{font-family:var(--mono);font-size:10px;color:#000;background:var(--accent);padding:2px 12px;letter-spacing:1px;white-space:nowrap;margin-right:20px;flex-shrink:0;font-weight:700;}
+.ticker-track{overflow:hidden;flex:1;}
+.ticker-scroll{display:flex;gap:48px;animation:scroll 50s linear infinite;white-space:nowrap;}
+@keyframes scroll{0%{transform:translateX(0);}100%{transform:translateX(-50%);}}
+.ticker-item{font-size:12px;color:var(--text2);font-family:var(--mono);}
+.ticker-item span{color:var(--accent);margin-right:6px;font-weight:600;}
+
+/* ── LAYOUT ── */
+.main-layout{max-width:1400px;margin:0 auto;padding:0 24px;}
+.section-header{padding:28px 0 18px;display:flex;align-items:flex-end;justify-content:space-between;border-bottom:1px solid var(--border);margin-bottom:24px;flex-wrap:wrap;gap:16px;}
+.section-title{font-family:var(--serif);font-size:30px;font-weight:900;line-height:1;}
+.section-subtitle{font-size:13px;color:var(--text2);margin-top:6px;font-weight:300;}
+.topic-chips{display:flex;gap:7px;flex-wrap:wrap;}
+.chip{font-family:var(--mono);font-size:11px;padding:6px 13px;border:1px solid var(--border);border-radius:20px;color:var(--text2);cursor:pointer;transition:all .2s;background:none;white-space:nowrap;}
+.chip:hover,.chip.active{border-color:var(--accent);color:var(--accent);background:rgba(232,200,74,.06);}
+
+/* ── AD ── */
+.ad-unit{background:linear-gradient(135deg,var(--bg2),var(--bg3));border:1px dashed var(--border);border-radius:var(--radius);padding:20px;text-align:center;color:var(--text3);font-family:var(--mono);font-size:11px;letter-spacing:1px;margin:24px 0;min-height:90px;display:flex;align-items:center;justify-content:center;}
+
+/* ── STATS ── */
+.stats-bar{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin:0 0 28px;padding:22px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);}
+.stat-item{text-align:center;}
+.stat-num{font-family:var(--serif);font-size:30px;font-weight:900;color:var(--accent);line-height:1;margin-bottom:4px;}
+.stat-label{font-size:11px;color:var(--text3);font-family:var(--mono);letter-spacing:.5px;}
+
+/* ── MAP ── */
+.map-section{margin:0 0 32px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+.map-header{display:flex;align-items:flex-start;justify-content:space-between;padding:18px 22px 14px;flex-wrap:wrap;gap:12px;border-bottom:1px solid var(--border);}
+.map-title{font-family:var(--serif);font-size:17px;font-weight:700;margin-bottom:3px;}
+.map-subtitle{font-family:var(--mono);font-size:10px;color:var(--text3);}
+.map-legend{display:flex;gap:14px;flex-wrap:wrap;}
+.legend-item{display:flex;align-items:center;gap:6px;font-family:var(--mono);font-size:10px;color:var(--text2);}
+.legend-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.map-container{position:relative;background:#0d1117;}
+#worldMap{width:100%;height:auto;display:block;max-height:320px;}
+.hl-country{cursor:pointer;transition:fill-opacity .2s,stroke-width .2s;}
+.hl-country:hover{fill-opacity:.5!important;stroke-width:2.5;}
+.hl-country.active-country{fill-opacity:.55!important;stroke-width:2.5;}
+.pulse-ring{animation:mapPulse 2.8s ease-out infinite;transform-box:fill-box;transform-origin:center;}
+.pulse-ring2{animation:mapPulse 2.8s ease-out infinite .9s;transform-box:fill-box;transform-origin:center;}
+@keyframes mapPulse{0%{opacity:.85;transform:scale(1);}70%{opacity:0;transform:scale(2.4);}100%{opacity:0;transform:scale(2.4);}}
+.hotspot:hover text{fill:var(--accent)!important;}
+.map-controls{position:absolute;bottom:10px;right:12px;}
+.map-ctrl-btn{font-family:var(--mono);font-size:10px;padding:5px 10px;background:rgba(17,19,24,.9);border:1px solid var(--border);color:var(--text2);border-radius:4px;cursor:pointer;transition:all .2s;}
+.map-ctrl-btn:hover{border-color:var(--accent);color:var(--accent);}
+.country-source-row{display:flex;gap:8px;padding:12px 22px;border-top:1px solid var(--border);flex-wrap:wrap;}
+.src-btn{font-family:var(--mono);font-size:11px;padding:6px 13px;border-radius:4px;cursor:pointer;border:1px solid transparent;background:var(--bg3);color:var(--text2);transition:all .2s;display:flex;align-items:center;gap:5px;}
+.src-usa:hover,.src-usa.active{border-color:#c0392b;background:rgba(192,57,43,.1);color:#e74c3c;}
+.src-uk:hover,.src-uk.active{border-color:#2980b9;background:rgba(41,128,185,.1);color:#4a8fe8;}
+.src-fr:hover,.src-fr.active{border-color:#1a6bb5;background:rgba(26,107,181,.1);color:#5ba0e0;}
+.src-de:hover,.src-de.active{border-color:#f39c12;background:rgba(243,156,18,.1);color:#f39c12;}
+.src-es:hover,.src-es.active{border-color:#e74c3c;background:rgba(231,76,60,.1);color:#e74c3c;}
+.src-cn:hover,.src-cn.active{border-color:#e74c3c;background:rgba(231,76,60,.1);color:#e74c3c;}
+
+/* ── STORIES ── */
+.story-header{display:flex;align-items:flex-start;gap:16px;margin-bottom:20px;padding:22px;background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);position:relative;overflow:hidden;}
+.story-header::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--accent),var(--accent2),transparent);}
+.story-icon{font-size:34px;flex-shrink:0;line-height:1;}
+.story-category{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:2px;text-transform:uppercase;margin-bottom:7px;}
+.story-headline{font-family:var(--serif);font-size:23px;font-weight:700;line-height:1.2;margin-bottom:8px;}
+.story-summary{font-size:13px;color:var(--text2);line-height:1.6;max-width:680px;}
+.perspectives-label{font-family:var(--mono);font-size:11px;color:var(--text3);letter-spacing:1px;margin-bottom:11px;text-transform:uppercase;}
+.perspectives-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:13px;margin-bottom:36px;}
+
+/* ── CARDS ── */
+.perspective-card{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);padding:17px;cursor:pointer;transition:all .25s;position:relative;overflow:hidden;}
+.perspective-card:hover{border-color:var(--card-accent);transform:translateY(-2px);box-shadow:0 8px 28px rgba(0,0,0,.4);}
+.card-top{display:flex;align-items:center;gap:9px;margin-bottom:11px;}
+.flag{font-size:19px;line-height:1;}
+.source-name{font-family:var(--mono);font-size:11px;font-weight:600;color:var(--card-accent);}
+.source-country{font-size:10px;color:var(--text3);margin-top:1px;}
+.sentiment-badge{font-family:var(--mono);font-size:9px;padding:2px 7px;border-radius:3px;letter-spacing:.5px;font-weight:600;margin-left:auto;flex-shrink:0;}
+.sent-critical{background:rgba(192,57,43,.15);color:#e74c3c;}
+.sent-neutral{background:rgba(74,143,232,.15);color:#4a8fe8;}
+.sent-positive{background:rgba(46,204,113,.15);color:#2ecc71;}
+.sent-alarm{background:rgba(243,156,18,.15);color:#f39c12;}
+.card-headline{font-size:13.5px;font-weight:600;line-height:1.4;margin-bottom:9px;}
+.card-excerpt{font-size:12px;color:var(--text2);line-height:1.6;margin-bottom:13px;}
+.card-footer{display:flex;align-items:center;justify-content:space-between;}
+.card-time{font-family:var(--mono);font-size:10px;color:var(--text3);}
+.card-link{font-family:var(--mono);font-size:10px;padding:4px 9px;background:none;border:1px solid var(--border);color:var(--text2);border-radius:4px;cursor:pointer;transition:all .2s;text-decoration:none;display:inline-flex;align-items:center;gap:4px;}
+.card-link:hover{border-color:var(--accent2);color:var(--accent2);}
+.translate-btn{font-family:var(--mono);font-size:10px;padding:4px 9px;background:none;border:1px solid var(--border);color:var(--text2);border-radius:4px;cursor:pointer;transition:all .2s;}
+.translate-btn:hover{border-color:var(--accent2);color:var(--accent2);}
+.translated-text{margin-top:10px;padding:10px;background:rgba(74,143,232,.06);border-left:2px solid var(--accent2);border-radius:4px;font-size:12px;color:var(--text);line-height:1.6;display:none;animation:fadeIn .3s ease;}
+.translated-text.visible{display:block;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(4px);}to{opacity:1;transform:translateY(0);}}
+.story-divider{border:none;border-top:1px solid var(--border);margin:32px 0;position:relative;}
+.story-divider::after{content:'···';position:absolute;top:-9px;left:50%;transform:translateX(-50%);background:var(--bg);padding:0 12px;font-family:var(--mono);font-size:10px;color:var(--text3);}
+
+/* ── SKELETON ── */
+.skeleton-story{margin-bottom:36px;}
+.skel{background:linear-gradient(90deg,var(--bg3) 25%,var(--bg2) 50%,var(--bg3) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:4px;}
+@keyframes shimmer{0%{background-position:200% 0;}100%{background-position:-200% 0;}}
+
+/* ── ERROR / EMPTY ── */
+.fetch-status{text-align:center;padding:60px 20px;font-family:var(--mono);font-size:13px;color:var(--text3);}
+.fetch-status .big{font-size:36px;margin-bottom:12px;}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:28px 24px;margin-top:56px;max-width:1400px;margin-left:auto;margin-right:auto;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr;gap:36px;margin-bottom:28px;}
+.footer-brand{font-family:var(--serif);font-size:19px;font-weight:900;margin-bottom:9px;}
+.footer-desc{font-size:12px;color:var(--text3);line-height:1.7;max-width:290px;}
+.footer-col-title{font-family:var(--mono);font-size:10px;color:var(--accent);letter-spacing:2px;margin-bottom:12px;text-transform:uppercase;}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:7px;}
+.footer-links a{font-size:13px;color:var(--text2);text-decoration:none;transition:color .2s;}
+.footer-links a:hover{color:var(--text);}
+.footer-bottom{border-top:1px solid var(--border);padding-top:18px;display:flex;justify-content:space-between;align-items:center;font-size:11px;color:var(--text3);font-family:var(--mono);}
+
+/* ── RESPONSIVE ── */
+@media(max-width:900px){.perspectives-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:600px){
+  .perspectives-grid{grid-template-columns:1fr;}
+  .topbar{padding:0 14px;}
+  .main-layout{padding:0 14px;}
+  .section-header{flex-direction:column;}
+  .story-headline{font-size:18px;}
+  .stats-bar{grid-template-columns:repeat(2,1fr);}
+  .footer-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<header class="topbar">
+  <div class="logo"><div class="logo-dot"></div>GEOSCOPE</div>
+  <div class="topbar-right">
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('it')">IT</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" onclick="setLang('de')">DE</button>
+      <button class="lang-btn" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" onclick="setLang('zh')">中</button>
+    </div>
+    <div class="live-badge"><div class="live-dot"></div><span id="liveLabel">LIVE</span></div>
+  </div>
+</header>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-label" id="tickerLabel">BREAKING</div>
+  <div class="ticker-track">
+    <div class="ticker-scroll" id="tickerScroll">
+      <span class="ticker-item"><span>🌍</span> Loading latest headlines…</span>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main-layout">
+
+  <div class="section-header">
+    <div>
+      <div class="section-title" id="mainTitle">World Perspectives</div>
+      <div class="section-subtitle" id="mainSubtitle">Same story. Six lenses. Read the world differently.</div>
+    </div>
+    <div class="topic-chips" id="topicChips">
+      <button class="chip active" onclick="filterTopic(this,'all')">All Topics</button>
+      <button class="chip" onclick="filterTopic(this,'trade')">Trade War</button>
+      <button class="chip" onclick="filterTopic(this,'ukraine')">Ukraine</button>
+      <button class="chip" onclick="filterTopic(this,'mideast')">Middle East</button>
+      <button class="chip" onclick="filterTopic(this,'climate')">Climate</button>
+      <button class="chip" onclick="filterTopic(this,'tech')">Tech Rivalry</button>
+    </div>
+  </div>
+
+  <div class="ad-unit">[ ADVERTISEMENT — 728×90 LEADERBOARD ]</div>
+
+  <div class="stats-bar">
+    <div class="stat-item"><div class="stat-num">6</div><div class="stat-label" id="statCountries">Countries</div></div>
+    <div class="stat-item"><div class="stat-num" id="statArticleNum">—</div><div class="stat-label" id="statArticles">Articles Today</div></div>
+    <div class="stat-item"><div class="stat-num" id="statStoriesNum">—</div><div class="stat-label" id="statStories">Stories</div></div>
+    <div class="stat-item"><div class="stat-num">AI</div><div class="stat-label" id="statTranslation">Auto-Translation</div></div>
+  </div>
+
+  <!-- MAP -->
+  <div class="map-section">
+    <div class="map-header">
+      <div>
+        <div class="map-title" id="mapTitle">Global Hotspots</div>
+        <div class="map-subtitle" id="mapSubtitle">Click a region to filter · Pulse = active coverage</div>
+      </div>
+      <div class="map-legend">
+        <div class="legend-item"><span class="legend-dot" style="background:#e74c3c"></span><span id="leg1">High tension</span></div>
+        <div class="legend-item"><span class="legend-dot" style="background:#f39c12"></span><span id="leg2">Developing</span></div>
+        <div class="legend-item"><span class="legend-dot" style="background:#4a8fe8"></span><span id="leg3">Diplomatic</span></div>
+        <div class="legend-item"><span class="legend-dot" style="background:#2ecc71"></span><span id="leg4">Source country</span></div>
+      </div>
+    </div>
+    <div class="map-container">
+      <svg id="worldMap" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet">
+        <rect width="1000" height="500" fill="#0d1117" rx="8"/>
+        <g stroke="#1a1d24" stroke-width="0.5" opacity="0.7">
+          <line x1="0" y1="125" x2="1000" y2="125"/><line x1="0" y1="250" x2="1000" y2="250"/>
+          <line x1="0" y1="375" x2="1000" y2="375"/><line x1="250" y1="0" x2="250" y2="500"/>
+          <line x1="500" y1="0" x2="500" y2="500"/><line x1="750" y1="0" x2="750" y2="500"/>
+        </g>
+        <!-- Continents -->
+        <path d="M85,60 L160,45 L220,55 L240,80 L230,120 L210,145 L195,165 L180,190 L165,200 L150,210 L140,230 L125,240 L110,235 L95,220 L80,200 L70,175 L65,150 L60,125 L65,95Z" fill="#1a2035" stroke="#252830" stroke-width="1"/>
+        <path d="M150,230 L165,240 L175,255 L165,265 L150,260 L140,250Z" fill="#1a2035" stroke="#252830" stroke-width=".8"/>
+        <path d="M175,265 L210,255 L240,260 L255,280 L260,310 L255,345 L245,375 L225,400 L205,415 L185,420 L168,410 L155,390 L148,365 L145,340 L148,310 L155,285Z" fill="#1a2035" stroke="#252830" stroke-width="1"/>
+        <path d="M440,55 L480,48 L510,52 L525,65 L520,85 L505,95 L495,110 L480,115 L465,110 L450,118 L435,115 L425,105 L428,88 L435,72Z" fill="#1a2035" stroke="#252830" stroke-width="1"/>
+        <path d="M430,112 L448,118 L445,132 L432,135 L422,125 L423,113Z" fill="#1a2035" stroke="#252830" stroke-width=".8"/>
+        <path d="M448,68 L458,64 L462,75 L454,82 L446,78Z" fill="#1a2035" stroke="#252830" stroke-width=".8"/>
+        <path d="M480,35 L500,28 L515,38 L510,55 L495,60 L480,55Z" fill="#1a2035" stroke="#252830" stroke-width=".8"/>
+        <path d="M450,138 L495,132 L530,140 L548,165 L550,200 L545,240 L530,275 L510,305 L490,325 L468,335 L450,330 L432,315 L420,290 L415,260 L418,228 L425,200 L432,172 L440,152Z" fill="#1a2035" stroke="#252830" stroke-width="1"/>
+        <path d="M548,145 L580,138 L605,148 L615,165 L608,185 L590,195 L568,190 L550,178Z" fill="#1a2035" stroke="#252830" stroke-width=".8"/>
+        <path d="M525,30 L620,20 L720,25 L800,35 L830,55 L820,80 L790,90 L750,88 L700,92 L660,88 L620,90 L585,95 L555,88 L530,75 L522,55Z" fill="#1a2035" stroke="#252830" stroke-width="1"/>
+        <path d="M620,138 L660,132 L690,145 L695,175 L685,205 L668,220 L648,218 L632,200 L625,175 L618,155Z" fill="#1a2035" stroke="#252830" stroke-width=".8"/>
+        <path d="M720,155 L760,148 L785,162 L780,188 L758,198 L730,192 L715,175Z" fill="#1a2035" stroke="#252830" stroke-width=".8"/>
+        <path d="M700,88 L760,88 L810,98 L835,118 L830,148 L810,162 L785,162 L760,148 L730,145 L705,148 L688,138 L682,118 L690,100Z" fill="#1a2035" stroke="#252830" stroke-width="1"/>
+        <path d="M840,100 L858,95 L865,108 L858,120 L845,118 L838,108Z" fill="#1a2035" stroke="#252830" stroke-width=".8"/>
+        <path d="M780,310 L840,298 L890,305 L918,325 L920,358 L905,385 L875,398 L840,400 L808,390 L785,368 L775,340 L775,318Z" fill="#1a2035" stroke="#252830" stroke-width="1"/>
+        <path d="M200,18 L240,12 L268,20 L270,42 L250,52 L222,48 L200,35Z" fill="#1a2035" stroke="#252830" stroke-width=".8" opacity=".6"/>
+        <!-- Highlighted source countries -->
+        <path id="hl-usa" class="hl-country" onclick="mapFilterCountry('usa')" d="M85,60 L160,45 L220,55 L240,80 L230,120 L210,145 L195,165 L180,190 L165,200 L150,210 L140,230 L125,240 L110,235 L95,220 L80,200 L70,175 L65,150 L60,125 L65,95Z" fill="rgba(192,57,43,.18)" stroke="#c0392b" stroke-width="1.5"/>
+        <path id="hl-uk" class="hl-country" onclick="mapFilterCountry('uk')" d="M448,68 L458,64 L462,75 L454,82 L446,78Z" fill="rgba(41,128,185,.35)" stroke="#2980b9" stroke-width="1.5"/>
+        <path id="hl-fr" class="hl-country" onclick="mapFilterCountry('fr')" d="M448,88 L468,85 L478,97 L472,112 L455,115 L442,108 L440,96Z" fill="rgba(26,107,181,.35)" stroke="#1a6bb5" stroke-width="1.5"/>
+        <path id="hl-de" class="hl-country" onclick="mapFilterCountry('de')" d="M472,72 L492,70 L500,82 L495,96 L478,97 L468,85 L466,75Z" fill="rgba(243,156,18,.3)" stroke="#f39c12" stroke-width="1.5"/>
+        <path id="hl-es" class="hl-country" onclick="mapFilterCountry('es')" d="M430,112 L448,118 L445,132 L432,135 L422,125 L423,113Z" fill="rgba(192,57,43,.3)" stroke="#e74c3c" stroke-width="1.5"/>
+        <path id="hl-cn" class="hl-country" onclick="mapFilterCountry('cn')" d="M700,88 L760,88 L810,98 L835,118 L830,148 L810,162 L785,162 L760,148 L730,145 L705,148 L688,138 L682,118 L690,100Z" fill="rgba(231,76,60,.2)" stroke="#e74c3c" stroke-width="1.5"/>
+        <!-- Hotspots -->
+        <g class="hotspot" onclick="mapGoTo('ukraine')" style="cursor:pointer">
+          <circle cx="530" cy="90" r="10" fill="rgba(231,76,60,.12)" class="pulse-ring"/>
+          <circle cx="530" cy="90" r="5" fill="#e74c3c"/>
+          <text x="530" y="76" text-anchor="middle" fill="#e8eaf0" font-size="9" font-family="DM Mono,monospace">UKRAINE</text>
+        </g>
+        <g class="hotspot" onclick="mapGoTo('mideast')" style="cursor:pointer">
+          <circle cx="578" cy="162" r="10" fill="rgba(231,76,60,.12)" class="pulse-ring"/>
+          <circle cx="578" cy="162" r="5" fill="#e74c3c"/>
+          <text x="578" y="148" text-anchor="middle" fill="#e8eaf0" font-size="9" font-family="DM Mono,monospace">MID EAST</text>
+        </g>
+        <g class="hotspot" onclick="mapGoTo('tech')" style="cursor:pointer">
+          <circle cx="818" cy="148" r="9" fill="rgba(243,156,18,.15)" class="pulse-ring"/>
+          <circle cx="818" cy="148" r="4.5" fill="#f39c12"/>
+          <text x="835" y="152" text-anchor="start" fill="#e8eaf0" font-size="8" font-family="DM Mono,monospace">TAIWAN</text>
+        </g>
+        <g class="hotspot" onclick="mapGoTo('trade')" style="cursor:pointer">
+          <circle cx="910" cy="175" r="10" fill="rgba(74,143,232,.12)" class="pulse-ring"/>
+          <circle cx="910" cy="175" r="5" fill="#4a8fe8"/>
+          <text x="910" y="161" text-anchor="middle" fill="#e8eaf0" font-size="9" font-family="DM Mono,monospace">TRADE</text>
+        </g>
+        <g class="hotspot" style="cursor:pointer">
+          <circle cx="778" cy="205" r="8" fill="rgba(243,156,18,.12)" class="pulse-ring"/>
+          <circle cx="778" cy="205" r="3.5" fill="#f39c12"/>
+          <text x="795" y="209" text-anchor="start" fill="#e8eaf0" font-size="8" font-family="DM Mono,monospace">S.CHINA SEA</text>
+        </g>
+        <g class="hotspot" style="cursor:pointer">
+          <circle cx="485" cy="225" r="8" fill="rgba(243,156,18,.12)" class="pulse-ring"/>
+          <circle cx="485" cy="225" r="3.5" fill="#f39c12"/>
+          <text x="498" y="229" text-anchor="start" fill="#e8eaf0" font-size="8" font-family="DM Mono,monospace">SAHEL</text>
+        </g>
+        <!-- Country labels -->
+        <text x="148" y="140" text-anchor="middle" fill="#c0392b" font-size="9" font-family="DM Mono,monospace" font-weight="600">🇺🇸 USA</text>
+        <text x="453" y="73" text-anchor="middle" fill="#2980b9" font-size="8" font-family="DM Mono,monospace" font-weight="600">🇬🇧</text>
+        <text x="460" y="103" text-anchor="middle" fill="#1a6bb5" font-size="8" font-family="DM Mono,monospace" font-weight="600">🇫🇷</text>
+        <text x="483" y="87" text-anchor="middle" fill="#f39c12" font-size="8" font-family="DM Mono,monospace" font-weight="600">🇩🇪</text>
+        <text x="434" y="128" text-anchor="middle" fill="#e74c3c" font-size="8" font-family="DM Mono,monospace" font-weight="600">🇪🇸</text>
+        <text x="760" y="128" text-anchor="middle" fill="#e74c3c" font-size="9" font-family="DM Mono,monospace" font-weight="600">🇨🇳 CHINA</text>
+        <line x1="0" y1="268" x2="1000" y2="268" stroke="#1e2230" stroke-width=".7" stroke-dasharray="4,8"/>
+        <text x="8" y="264" fill="#2a2f3f" font-size="8" font-family="DM Mono,monospace">EQUATOR</text>
+      </svg>
+      <div class="map-controls">
+        <button class="map-ctrl-btn" onclick="mapReset()">↺ Reset</button>
+      </div>
+    </div>
+    <div class="country-source-row">
+      <button class="src-btn src-usa" onclick="mapFilterCountry('usa')"><span>🇺🇸</span> USA</button>
+      <button class="src-btn src-uk"  onclick="mapFilterCountry('uk')"><span>🇬🇧</span> UK</button>
+      <button class="src-btn src-fr"  onclick="mapFilterCountry('fr')"><span>🇫🇷</span> France</button>
+      <button class="src-btn src-de"  onclick="mapFilterCountry('de')"><span>🇩🇪</span> Germany</button>
+      <button class="src-btn src-es"  onclick="mapFilterCountry('es')"><span>🇪🇸</span> Spain</button>
+      <button class="src-btn src-cn"  onclick="mapFilterCountry('cn')"><span>🇨🇳</span> China</button>
+    </div>
+  </div>
+
+  <!-- STORIES -->
+  <div id="storiesContainer">
+    <!-- Skeleton loader -->
+    <div class="fetch-status"><div class="big">🌍</div>Loading live news…</div>
+  </div>
+
+  <div class="ad-unit">[ ADVERTISEMENT — 300×250 RECTANGLE ]</div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">GEOSCOPE</div>
+      <div class="footer-desc" id="footerDesc">Aggregating geopolitical news from six national perspectives. Powered by Claude AI translation. Updated every 30 minutes.</div>
+    </div>
+    <div>
+      <div class="footer-col-title">Sources</div>
+      <ul class="footer-links">
+        <li><a href="#">🇺🇸 Foreign Policy, CFR</a></li>
+        <li><a href="#">🇬🇧 Guardian, BBC World</a></li>
+        <li><a href="#">🇫🇷 Le Monde, France 24</a></li>
+        <li><a href="#">🇩🇪 DW, Spiegel Intl.</a></li>
+        <li><a href="#">🇪🇸 El País, El Mundo</a></li>
+        <li><a href="#">🇨🇳 Xinhua, SCMP</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">About</div>
+      <ul class="footer-links">
+        <li><a href="#">How it works</a></li>
+        <li><a href="#">Methodology</a></li>
+        <li><a href="#">Advertise</a></li>
+        <li><a href="#">Privacy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 GEOSCOPE</span>
+    <span id="footerTime">Updating…</span>
+  </div>
+</footer>
+
+<script>
+// ── State ──────────────────────────────────────────
+let currentLang  = 'en';
+let currentTopic = 'all';
+let allStories   = [];
+let activeCountry = null;
+
+const COUNTRY_COLORS = {usa:'#c0392b',uk:'#2980b9',fr:'#1a6bb5',de:'#f39c12',es:'#e74c3c',cn:'#e74c3c'};
+
+// ── i18n ──────────────────────────────────────────
+const UI = {
+  en:{mainTitle:'World Perspectives',mainSubtitle:'Same story. Six lenses. Read the world differently.',tickerLabel:'BREAKING',liveLabel:'LIVE',translateBtn:'✦ Translate',showOriginal:'Show original',statCountries:'Countries',statArticles:'Articles Today',statStories:'Stories',statTranslation:'Auto-Translation',perspLabel:'PERSPECTIVES',footerDesc:'Aggregating geopolitical news from six national perspectives. Powered by Claude AI. Updated every 30 min.',footerTime:'Updated',mapTitle:'Global Hotspots',mapSubtitle:'Click a region to filter · Pulse = active coverage',leg1:'High tension',leg2:'Developing',leg3:'Diplomatic',leg4:'Source country',allTopics:'All Topics',tradeWar:'Trade War',ukraine:'Ukraine',mideast:'Middle East',climate:'Climate',techRival:'Tech Rivalry',readMore:'Read →',loading:'Loading live news…',noStories:'No stories found for this filter.'},
+  it:{mainTitle:'Prospettive Mondiali',mainSubtitle:'La stessa storia. Sei obiettivi. Leggi il mondo diversamente.',tickerLabel:'ULTIME',liveLabel:'LIVE',translateBtn:'✦ Traduci',showOriginal:'Mostra originale',statCountries:'Paesi',statArticles:'Articoli Oggi',statStories:'Storie',statTranslation:'Traduzione AI',perspLabel:'PROSPETTIVE',footerDesc:'Aggrega notizie geopolitiche da sei prospettive nazionali. Traduzione AI Claude. Aggiornato ogni 30 min.',footerTime:'Aggiornato',mapTitle:'Punti Caldi Globali',mapSubtitle:'Clicca una regione per filtrare · Pulsante = copertura attiva',leg1:'Alta tensione',leg2:'In sviluppo',leg3:'Diplomatico',leg4:'Paese fonte',allTopics:'Tutti i temi',tradeWar:'Guerra Commerciale',ukraine:'Ucraina',mideast:'Medio Oriente',climate:'Clima',techRival:'Rivalità Tech',readMore:'Leggi →',loading:'Caricamento notizie…',noStories:'Nessuna storia per questo filtro.'},
+  fr:{mainTitle:'Perspectives Mondiales',mainSubtitle:'La même histoire. Six objectifs. Lisez le monde autrement.',tickerLabel:'BREAKING',liveLabel:'EN DIRECT',translateBtn:'✦ Traduire',showOriginal:'Voir original',statCountries:'Pays',statArticles:'Articles Aujourd\'hui',statStories:'Sujets',statTranslation:'Traduction IA',perspLabel:'PERSPECTIVES',footerDesc:'Agrège les actualités géopolitiques de six perspectives nationales. IA Claude. Mis à jour toutes les 30 min.',footerTime:'Mis à jour',mapTitle:'Points Chauds Mondiaux',mapSubtitle:'Cliquez une région pour filtrer · Pulsation = couverture active',leg1:'Haute tension',leg2:'En développement',leg3:'Diplomatique',leg4:'Pays source',allTopics:'Tous les sujets',tradeWar:'Guerre commerciale',ukraine:'Ukraine',mideast:'Moyen-Orient',climate:'Climat',techRival:'Rivalité Tech',readMore:'Lire →',loading:'Chargement des actualités…',noStories:'Aucun résultat pour ce filtre.'},
+  de:{mainTitle:'Weltperspektiven',mainSubtitle:'Dieselbe Geschichte. Sechs Linsen. Die Welt anders lesen.',tickerLabel:'AKTUELL',liveLabel:'LIVE',translateBtn:'✦ Übersetzen',showOriginal:'Original anzeigen',statCountries:'Länder',statArticles:'Artikel Heute',statStories:'Themen',statTranslation:'KI-Übersetzung',perspLabel:'PERSPEKTIVEN',footerDesc:'Aggregiert geopolitische Nachrichten aus sechs nationalen Perspektiven. Claude KI. Alle 30 Min aktualisiert.',footerTime:'Aktualisiert',mapTitle:'Globale Brennpunkte',mapSubtitle:'Region anklicken zum Filtern · Puls = aktive Berichterstattung',leg1:'Hohe Spannung',leg2:'Entwicklung',leg3:'Diplomatisch',leg4:'Quellenland',allTopics:'Alle Themen',tradeWar:'Handelskrieg',ukraine:'Ukraine',mideast:'Naher Osten',climate:'Klima',techRival:'Tech-Rivalität',readMore:'Lesen →',loading:'Nachrichten werden geladen…',noStories:'Keine Ergebnisse für diesen Filter.'},
+  es:{mainTitle:'Perspectivas Mundiales',mainSubtitle:'La misma historia. Seis objetivos. Lee el mundo diferente.',tickerLabel:'ÚLTIMA HORA',liveLabel:'EN VIVO',translateBtn:'✦ Traducir',showOriginal:'Ver original',statCountries:'Países',statArticles:'Artículos Hoy',statStories:'Historias',statTranslation:'Traducción IA',perspLabel:'PERSPECTIVAS',footerDesc:'Agrega noticias geopolíticas desde seis perspectivas. IA Claude. Actualizado cada 30 min.',footerTime:'Actualizado',mapTitle:'Puntos Calientes',mapSubtitle:'Haz clic en una región para filtrar · Pulso = cobertura activa',leg1:'Alta tensión',leg2:'En desarrollo',leg3:'Diplomático',leg4:'País fuente',allTopics:'Todos los temas',tradeWar:'Guerra Comercial',ukraine:'Ucrania',mideast:'Oriente Medio',climate:'Clima',techRival:'Rivalidad Tech',readMore:'Leer →',loading:'Cargando noticias…',noStories:'No hay resultados para este filtro.'},
+  zh:{mainTitle:'全球视角',mainSubtitle:'同一故事，六种视角，以不同方式读懂世界。',tickerLabel:'突发新闻',liveLabel:'实时',translateBtn:'✦ 翻译',showOriginal:'显示原文',statCountries:'国家',statArticles:'今日文章',statStories:'故事',statTranslation:'AI翻译',perspLabel:'视角',footerDesc:'汇聚来自六个国家视角的地缘政治新闻。Claude AI翻译，每30分钟更新。',footerTime:'更新于',mapTitle:'全球热点地区',mapSubtitle:'点击区域筛选报道 · 脉冲 = 活跃报道',leg1:'高度紧张',leg2:'持续发展',leg3:'外交',leg4:'来源国家',allTopics:'所有主题',tradeWar:'贸易战',ukraine:'乌克兰',mideast:'中东',climate:'气候',techRival:'科技竞争',readMore:'阅读 →',loading:'正在加载新闻…',noStories:'没有找到符合此过滤器的故事。'},
+};
+
+function ui(key){ return (UI[currentLang]||UI.en)[key]||key; }
+
+// ── Lang switch ────────────────────────────────────
+function setLang(lang){
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b=>b.classList.toggle('active',b.textContent.toLowerCase()===lang||(lang==='zh'&&b.textContent==='中')));
+  applyUIStrings();
+  renderStories();
+}
+
+function applyUIStrings(){
+  const set = (id,k) => { const el=document.getElementById(id); if(el) el.textContent=ui(k); };
+  set('mainTitle','mainTitle'); set('mainSubtitle','mainSubtitle');
+  set('tickerLabel','tickerLabel'); set('liveLabel','liveLabel');
+  set('statCountries','statCountries'); set('statArticles','statArticles');
+  set('statStories','statStories'); set('statTranslation','statTranslation');
+  set('mapTitle','mapTitle'); set('mapSubtitle','mapSubtitle');
+  set('leg1','leg1'); set('leg2','leg2'); set('leg3','leg3'); set('leg4','leg4');
+  set('footerDesc','footerDesc');
+  const chips = document.querySelectorAll('#topicChips .chip');
+  const labels = ['allTopics','tradeWar','ukraine','mideast','climate','techRival'];
+  chips.forEach((c,i)=>c.textContent=ui(labels[i]));
+}
+
+// ── Data fetch ─────────────────────────────────────
+async function loadStories(){
+  try {
+    const r = await fetch('/api/stories');
+    const data = await r.json();
+    allStories = data.stories || [];
+    // Update stats
+    const an = document.getElementById('statArticleNum');
+    const sn = document.getElementById('statStoriesNum');
+    if(an) an.textContent = data.count || '—';
+    if(sn) sn.textContent = allStories.length || '—';
+    // Update footer time
+    if(data.last_fetch){
+      const ft = document.getElementById('footerTime');
+      if(ft) ft.textContent = ui('footerTime')+': '+new Date(data.last_fetch).toLocaleTimeString();
+    }
+    renderStories();
+  } catch(e){
+    document.getElementById('storiesContainer').innerHTML =
+      `<div class="fetch-status"><div class="big">⚠️</div>Could not load stories. Retrying…</div>`;
+  }
+}
+
+async function loadTicker(){
+  try {
+    const r = await fetch('/api/ticker');
+    const items = await r.json();
+    if(!items.length) return;
+    const html = items.map(i=>`<span class="ticker-item"><span>${i.flag} ${i.source}</span>${i.title}</span>`).join('');
+    // Duplicate for seamless scroll
+    document.getElementById('tickerScroll').innerHTML = html+html;
+  } catch(e){ /* keep default */ }
+}
+
+// ── Render ─────────────────────────────────────────
+function getSentClass(s){ return {critical:'sent-critical',neutral:'sent-neutral',positive:'sent-positive',alarm:'sent-alarm'}[s]||'sent-neutral'; }
+
+function renderStories(){
+  const container = document.getElementById('storiesContainer');
+  const filtered = currentTopic==='all' ? allStories : allStories.filter(s=>s.topic===currentTopic);
+
+  if(!filtered.length){
+    container.innerHTML = `<div class="fetch-status"><div class="big">🔍</div>${ui('noStories')}</div>`;
+    return;
+  }
+
+  container.innerHTML = filtered.map((story,si)=>`
+    <div class="story-header">
+      <div class="story-icon">${story.icon||'📰'}</div>
+      <div>
+        <div class="story-category">${(story.category&&(story.category[currentLang]||story.category.en))||story.topic.toUpperCase()}</div>
+        <div class="story-headline">${(story.headline&&(story.headline[currentLang]||story.headline.en))||''}</div>
+        <div class="story-summary">${(story.summary&&(story.summary[currentLang]||story.summary.en))||''}</div>
+      </div>
+    </div>
+    <div class="perspectives-label">${ui('perspLabel')}</div>
+    <div class="perspectives-grid">
+      ${(story.cards||[]).map((c,ci)=>renderCard(c,story.id,ci)).join('')}
+    </div>
+    ${si<filtered.length-1?'<hr class="story-divider">':''}
+  `).join('');
+}
+
+function renderCard(card, storyId, ci){
+  const color = COUNTRY_COLORS[card.country]||'#888';
+  const cardId = `c-${storyId}-${ci}`.replace(/[^a-z0-9-]/gi,'-');
+  const hasTranslation = card.translated && card.translated[currentLang] && card.translated[currentLang] !== card.excerpt;
+  return `
+  <div class="perspective-card" style="--card-accent:${color}" id="${cardId}">
+    <div class="card-top">
+      <div class="flag">${card.flag}</div>
+      <div>
+        <div class="source-name">${card.source}</div>
+        <div class="source-country">${card.original||''} original</div>
+      </div>
+      <div class="sentiment-badge ${getSentClass(card.sentiment)}">${card.sentLabel||'NEWS'}</div>
+    </div>
+    <div class="card-headline">${card.headline||''}</div>
+    <div class="card-excerpt" id="exc-${cardId}">${card.excerpt||''}</div>
+    ${hasTranslation?`<div class="translated-text" id="tr-${cardId}">${card.translated[currentLang]}</div>`:''}
+    <div class="card-footer">
+      <div class="card-time">${card.time||''}</div>
+      <div style="display:flex;gap:6px;align-items:center">
+        ${hasTranslation?`<button class="translate-btn" onclick="toggleTranslate('${cardId}',this)">${ui('translateBtn')}</button>`:''}
+        ${card.link?`<a class="card-link" href="${card.link}" target="_blank" rel="noopener">${ui('readMore')}</a>`:''}
+      </div>
+    </div>
+  </div>`;
+}
+
+function toggleTranslate(cardId, btn){
+  const tr = document.getElementById('tr-'+cardId);
+  if(!tr) return;
+  const vis = tr.classList.contains('visible');
+  tr.classList.toggle('visible',!vis);
+  btn.textContent = vis ? ui('translateBtn') : ui('showOriginal');
+}
+
+function filterTopic(el, topic){
+  currentTopic = topic;
+  document.querySelectorAll('.chip').forEach(c=>c.classList.remove('active'));
+  el.classList.add('active');
+  renderStories();
+}
+
+// ── Map ────────────────────────────────────────────
+function mapFilterCountry(country){
+  if(activeCountry===country){ mapReset(); return; }
+  activeCountry = country;
+  document.querySelectorAll('.hl-country').forEach(e=>e.classList.remove('active-country'));
+  const hl = document.getElementById('hl-'+country);
+  if(hl) hl.classList.add('active-country');
+  document.querySelectorAll('.src-btn').forEach(b=>b.classList.remove('active'));
+  const sb = document.querySelector('.src-'+country);
+  if(sb) sb.classList.add('active');
+  renderStories();
+  setTimeout(()=>{
+    document.querySelectorAll('.perspective-card').forEach(card=>{
+      const sn = card.querySelector('.source-name')?.textContent||'';
+      const match = allStories.some(s=>(s.cards||[]).some(c=>c.country===country && c.source===sn));
+      card.style.opacity = match?'1':'0.3';
+      card.style.transition = 'opacity .3s';
+      if(match) card.style.boxShadow = `0 0 0 1.5px ${COUNTRY_COLORS[country]}55, 0 6px 24px rgba(0,0,0,.4)`;
+    });
+  },60);
+  document.getElementById('storiesContainer')?.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function mapGoTo(topic){
+  currentTopic = topic;
+  mapReset(false);
+  renderStories();
+  document.getElementById('storiesContainer')?.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function mapReset(rerender=true){
+  activeCountry = null;
+  document.querySelectorAll('.hl-country').forEach(e=>e.classList.remove('active-country'));
+  document.querySelectorAll('.src-btn').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.perspective-card').forEach(c=>{c.style.opacity='';c.style.boxShadow='';c.style.transition='';});
+  if(rerender){ currentTopic='all'; renderStories(); }
+}
+
+// ── Init ───────────────────────────────────────────
+applyUIStrings();
+loadStories();
+loadTicker();
+// Refresh every 30 minutes
+setInterval(()=>{ loadStories(); loadTicker(); }, 30*60*1000);
+// Live clock
+setInterval(()=>{
+  const ft = document.getElementById('footerTime');
+  if(ft && ft.textContent) ft.textContent = ft.textContent.split(' ').slice(0,-1).join(' ')+' '+new Date().toLocaleTimeString();
+},60000);
+</script>
+</body>
+</html>

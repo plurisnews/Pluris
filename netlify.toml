@@ -1,0 +1,14 @@
+[build]
+  publish = "public"
+  # Non c'è build command — il sito è statico, i dati arrivano da GitHub
+
+[[headers]]
+  for = "/data/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Cache-Control = "public, max-age=1800"
+
+[[headers]]
+  for = "/*.html"
+  [headers.values]
+    Cache-Control = "public, max-age=300"

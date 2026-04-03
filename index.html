@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PLURIS NEWS — World Perspectives</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0c10;
+    --bg2: #111318;
+    --bg3: #1a1d24;
+    --border: #252830;
+    --accent: #e8c84a;
+    --accent2: #4a8fe8;
+    --text: #e8eaf0;
+    --text2: #8a8fa0;
+    --text3: #555a6a;
+    --usa: #c0392b;
+    --uk: #2980b9;
+    --fr: #1a6bb5;
+    --de: #f39c12;
+    --es: #c0392b;
+    --cn: #e74c3c;
+    --radius: 8px;
+    --mono: 'DM Mono', monospace;
+    --serif: 'Playfair Display', serif;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    background: var(--bg);
+    border-bottom: 1px solid var(--border);
+    padding: 0 32px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 52px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(12px);
+  }
+
+  .logo {
+    font-family: var(--serif);
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: -0.5px;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .logo-dot {
+    width: 8px; height: 8px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(0.8); }
+  }
+
+  .topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .lang-switcher {
+    display: flex;
+    gap: 4px;
+    background: var(--bg3);
+    border-radius: 6px;
+    padding: 3px;
+  }
+
+  .lang-btn {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 4px 10px;
+    border: none;
+    background: none;
+    color: var(--text2);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+  }
+
+  .lang-btn.active {
+    background: var(--accent);
+    color: #000;
+  }
+
+  .live-badge {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    border: 1px solid var(--accent);
+    padding: 3px 8px;
+    border-radius: 3px;
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .live-dot {
+    width: 5px; height: 5px;
+    background: var(--accent);
+    border-radius: 50%;
+    animation: pulse 1.2s infinite;
+  }
+
+  /* ── TICKER ── */
+  .ticker {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 8px 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+  }
+
+  .ticker-label {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: #000;
+    background: var(--accent);
+    padding: 2px 12px;
+    letter-spacing: 1px;
+    white-space: nowrap;
+    margin-right: 20px;
+    flex-shrink: 0;
+    font-weight: 700;
+  }
+
+  .ticker-scroll {
+    display: flex;
+    gap: 40px;
+    animation: scroll 40s linear infinite;
+    white-space: nowrap;
+  }
+
+  @keyframes scroll {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .ticker-item {
+    font-size: 12px;
+    color: var(--text2);
+    font-family: var(--mono);
+  }
+
+  .ticker-item span {
+    color: var(--accent);
+    margin-right: 8px;
+    font-weight: 600;
+  }
+
+  /* ── HERO TOPIC ── */
+  .main-layout {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .section-header {
+    padding: 32px 0 20px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 28px;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 900;
+    line-height: 1;
+  }
+
+  .section-subtitle {
+    font-size: 13px;
+    color: var(--text2);
+    margin-top: 6px;
+    font-weight: 300;
+  }
+
+  .topic-chips {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+
+  .chip {
+    font-family: var(--mono);
+    font-size: 11px;
+    padding: 6px 14px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--text2);
+    cursor: pointer;
+    transition: all 0.2s;
+    background: none;
+    white-space: nowrap;
+  }
+
+  .chip:hover, .chip.active {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(232, 200, 74, 0.06);
+  }
+
+  /* ── COMPARATIVE GRID ── */
+  .story-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 24px;
+    padding: 24px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .story-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--accent), var(--accent2), transparent);
+  }
+
+  .story-icon {
+    font-size: 36px;
+    flex-shrink: 0;
+    line-height: 1;
+  }
+
+  .story-meta {
+    flex: 1;
+  }
+
+  .story-category {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+
+  .story-headline {
+    font-family: var(--serif);
+    font-size: 26px;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 10px;
+  }
+
+  .story-summary {
+    font-size: 13px;
+    color: var(--text2);
+    line-height: 1.6;
+    max-width: 700px;
+  }
+
+  .perspectives-label {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text3);
+    letter-spacing: 1px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+  }
+
+  .perspectives-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 40px;
+  }
+
+  @media (max-width: 900px) {
+    .perspectives-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  @media (max-width: 600px) {
+    .perspectives-grid { grid-template-columns: 1fr; }
+    .topbar { padding: 0 16px; }
+    .main-layout { padding: 0 16px; }
+    .section-header { flex-direction: column; align-items: flex-start; gap: 16px; }
+    .story-headline { font-size: 20px; }
+  }
+
+  .perspective-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 18px;
+    cursor: pointer;
+    transition: all 0.25s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .perspective-card::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(255,255,255,0.02) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .perspective-card:hover {
+    border-color: var(--card-accent);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+  }
+
+  .card-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .flag {
+    font-size: 20px;
+    line-height: 1;
+  }
+
+  .source-info {
+    flex: 1;
+  }
+
+  .source-name {
+    font-family: var(--mono);
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--card-accent);
+    letter-spacing: 0.5px;
+  }
+
+  .source-country {
+    font-size: 10px;
+    color: var(--text3);
+    margin-top: 1px;
+  }
+
+  .sentiment-badge {
+    font-family: var(--mono);
+    font-size: 9px;
+    padding: 2px 7px;
+    border-radius: 3px;
+    letter-spacing: 0.5px;
+    font-weight: 600;
+  }
+
+  .sent-critical { background: rgba(192,57,43,0.15); color: #e74c3c; }
+  .sent-neutral  { background: rgba(74,143,232,0.15); color: #4a8fe8; }
+  .sent-positive { background: rgba(46,204,113,0.15); color: #2ecc71; }
+  .sent-alarm    { background: rgba(243,156,18,0.15); color: #f39c12; }
+
+  .card-headline {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.4;
+    margin-bottom: 10px;
+    color: var(--text);
+  }
+
+  .card-excerpt {
+    font-size: 12px;
+    color: var(--text2);
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+
+  .card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .card-time {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+  }
+
+  .translate-btn {
+    font-family: var(--mono);
+    font-size: 10px;
+    padding: 4px 10px;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text2);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
+
+  .translate-btn:hover {
+    border-color: var(--accent2);
+    color: var(--accent2);
+  }
+
+  .translate-btn.loading {
+    opacity: 0.6;
+    pointer-events: none;
+  }
+
+  .translated-text {
+    margin-top: 10px;
+    padding: 10px;
+    background: rgba(74,143,232,0.06);
+    border-left: 2px solid var(--accent2);
+    border-radius: 4px;
+    font-size: 12px;
+    color: var(--text);
+    line-height: 1.6;
+    display: none;
+    animation: fadeIn 0.3s ease;
+  }
+
+  .translated-text.visible { display: block; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── DIVIDER ── */
+  .story-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 36px 0;
+    position: relative;
+  }
+
+  .story-divider::after {
+    content: attr(data-n);
+    position: absolute;
+    top: -9px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--bg);
+    padding: 0 12px;
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text3);
+    letter-spacing: 1px;
+  }
+
+  /* ── SIDEBAR / BOTTOM STATS ── */
+  .stats-bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin: 36px 0;
+    padding: 24px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
+
+  @media (max-width: 700px) {
+    .stats-bar { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  .stat-item { text-align: center; }
+
+  .stat-num {
+    font-family: var(--serif);
+    font-size: 32px;
+    font-weight: 900;
+    color: var(--accent);
+    line-height: 1;
+    margin-bottom: 4px;
+  }
+
+  .stat-label {
+    font-size: 11px;
+    color: var(--text3);
+    font-family: var(--mono);
+    letter-spacing: 0.5px;
+  }
+
+  /* ── AD PLACEHOLDER ── */
+  .ad-unit {
+    background: linear-gradient(135deg, var(--bg2), var(--bg3));
+    border: 1px dashed var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    text-align: center;
+    color: var(--text3);
+    font-family: var(--mono);
+    font-size: 11px;
+    letter-spacing: 1px;
+    margin: 28px 0;
+    min-height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 32px 24px;
+    margin-top: 60px;
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 32px;
+  }
+
+  @media (max-width: 700px) {
+    .footer-grid { grid-template-columns: 1fr; gap: 24px; }
+    .perspectives-grid { grid-template-columns: 1fr; }
+  }
+
+  .footer-brand {
+    font-family: var(--serif);
+    font-size: 20px;
+    font-weight: 900;
+    margin-bottom: 10px;
+  }
+
+  .footer-desc {
+    font-size: 12px;
+    color: var(--text3);
+    line-height: 1.7;
+    max-width: 300px;
+  }
+
+  .footer-col-title {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--accent);
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .footer-links a {
+    font-size: 13px;
+    color: var(--text2);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+
+  .footer-links a:hover { color: var(--text); }
+
+  .footer-bottom {
+    border-top: 1px solid var(--border);
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--text3);
+    font-family: var(--mono);
+  }
+
+  /* ── MODAL / OVERLAY ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.85);
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .modal-overlay.open { display: flex; }
+
+  .modal {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 32px;
+    max-width: 600px;
+    width: 90%;
+    position: relative;
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+
+  .modal h2 {
+    font-family: var(--serif);
+    font-size: 22px;
+    margin-bottom: 8px;
+  }
+
+  .modal p {
+    color: var(--text2);
+    font-size: 13px;
+    line-height: 1.7;
+    margin-top: 10px;
+  }
+
+  .modal-close {
+    position: absolute;
+    top: 16px; right: 20px;
+    background: none;
+    border: none;
+    color: var(--text2);
+    font-size: 20px;
+    cursor: pointer;
+    line-height: 1;
+  }
+
+  .modal-close:hover { color: var(--text); }
+
+  /* ── SKELETON loading ── */
+  .skeleton {
+    background: linear-gradient(90deg, var(--bg3) 25%, var(--bg2) 50%, var(--bg3) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 4px;
+  }
+
+  @keyframes shimmer {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
+  }
+
+  /* ── SEARCH ── */
+  .search-wrap {
+    position: relative;
+    margin-bottom: 0;
+  }
+
+  .search-input {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 14px 8px 36px;
+    color: var(--text);
+    font-family: var(--sans);
+    font-size: 13px;
+    outline: none;
+    width: 180px;
+    transition: all 0.2s;
+  }
+
+  .search-input:focus {
+    border-color: var(--accent);
+    width: 220px;
+  }
+
+  .search-icon {
+    position: absolute;
+    left: 11px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text3);
+    font-size: 13px;
+    pointer-events: none;
+  }
+
+  /* ── WORLD MAP ── */
+  .map-section {
+    margin: 0 0 36px;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+  .map-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 20px 24px 16px;
+    flex-wrap: wrap;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+  .map-title { font-family: var(--serif); font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+  .map-subtitle { font-family: var(--mono); font-size: 10px; color: var(--text3); letter-spacing: 0.5px; }
+  .map-legend { display: flex; gap: 16px; flex-wrap: wrap; }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-family: var(--mono); font-size: 10px; color: var(--text2); }
+  .legend-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+  .map-container { position: relative; padding: 0; background: #0d1117; }
+  #worldMap { width: 100%; height: auto; display: block; max-height: 340px; }
+  .continent { transition: fill 0.2s; }
+  .hl-country { transition: fill 0.2s, stroke-width 0.2s; cursor: pointer; }
+  .hl-country:hover { fill-opacity: 0.45 !important; stroke-width: 2.5; }
+  .hl-country.active-country { fill-opacity: 0.55 !important; stroke-width: 2.5; }
+  .pulse-ring { animation: mapPulse 2.5s ease-out infinite; transform-box: fill-box; transform-origin: center; }
+  .pulse-ring2 { animation: mapPulse 2.5s ease-out infinite 0.8s; transform-box: fill-box; transform-origin: center; }
+  @keyframes mapPulse {
+    0%   { opacity: 0.9; transform: scale(1); }
+    70%  { opacity: 0;   transform: scale(2.2); }
+    100% { opacity: 0;   transform: scale(2.2); }
+  }
+  .hotspot:hover text { fill: var(--accent) !important; }
+  .map-tooltip {
+    position: absolute;
+    background: rgba(17,19,24,0.96);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 8px 12px;
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--text);
+    pointer-events: none;
+    display: none;
+    z-index: 10;
+    white-space: nowrap;
+  }
+  .map-controls { position: absolute; bottom: 10px; right: 14px; display: flex; gap: 6px; }
+  .map-ctrl-btn {
+    font-family: var(--mono); font-size: 10px; padding: 5px 10px;
+    background: rgba(17,19,24,0.9); border: 1px solid var(--border);
+    color: var(--text2); border-radius: 4px; cursor: pointer; transition: all 0.2s;
+  }
+  .map-ctrl-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .country-source-row { display: flex; gap: 8px; padding: 14px 24px; border-top: 1px solid var(--border); flex-wrap: wrap; }
+  .src-btn {
+    font-family: var(--mono); font-size: 11px; padding: 6px 14px;
+    border-radius: 4px; cursor: pointer; border: 1px solid transparent;
+    background: var(--bg3); color: var(--text2); transition: all 0.2s;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .src-usa:hover, .src-usa.active { border-color: #c0392b; background: rgba(192,57,43,0.1); color: #e74c3c; }
+  .src-uk:hover,  .src-uk.active  { border-color: #2980b9; background: rgba(41,128,185,0.1); color: #4a8fe8; }
+  .src-fr:hover,  .src-fr.active  { border-color: #1a6bb5; background: rgba(26,107,181,0.1); color: #5ba0e0; }
+  .src-de:hover,  .src-de.active  { border-color: #f39c12; background: rgba(243,156,18,0.1);  color: #f39c12; }
+  .src-es:hover,  .src-es.active  { border-color: #e74c3c; background: rgba(231,76,60,0.1);   color: #e74c3c; }
+  .src-cn:hover,  .src-cn.active  { border-color: #e74c3c; background: rgba(231,76,60,0.1);   color: #e74c3c; }
+</style>
+</head>
+<body>
+
+<!-- TOP BAR -->
+<header class="topbar">
+  <div class="logo">
+    <div class="logo-dot"></div>
+    PLURIS
+  </div>
+  <div class="topbar-right">
+    <div class="search-wrap">
+      <span class="search-icon">🔍</span>
+      <input class="search-input" type="text" placeholder="Search stories..." id="searchInput">
+    </div>
+    <div class="lang-switcher">
+      <button class="lang-btn active" onclick="setLang('en')">EN</button>
+      <button class="lang-btn" onclick="setLang('it')">IT</button>
+      <button class="lang-btn" onclick="setLang('fr')">FR</button>
+      <button class="lang-btn" onclick="setLang('de')">DE</button>
+      <button class="lang-btn" onclick="setLang('es')">ES</button>
+      <button class="lang-btn" onclick="setLang('zh')">中</button>
+    </div>
+    <div class="live-badge"><div class="live-dot"></div> <span id="liveLabel">LIVE</span></div>
+  </div>
+</header>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-label" id="tickerLabel">BREAKING</div>
+  <div class="ticker-scroll" id="tickerScroll">
+    <span class="ticker-item"><span>🇺🇸 WSJ</span> Fed holds rates steady amid trade uncertainty</span>
+    <span class="ticker-item"><span>🇬🇧 FT</span> UK-EU trade talks enter decisive phase</span>
+    <span class="ticker-item"><span>🇫🇷 LeMonde</span> Macron proposes European defence fund</span>
+    <span class="ticker-item"><span>🇩🇪 SpiegelOnl.</span> Berlin coalition crisis deepens</span>
+    <span class="ticker-item"><span>🇪🇸 ElPaís</span> Spain mediates in Western Sahara dispute</span>
+    <span class="ticker-item"><span>🇨🇳 XinhuaNet</span> Beijing rejects new tariff package</span>
+    <span class="ticker-item"><span>🇺🇸 NYT</span> Senate debates foreign aid bill</span>
+    <span class="ticker-item"><span>🇬🇧 Guardian</span> Climate summit stalls on fossil fuel phaseout</span>
+    <!-- duplicate for seamless loop -->
+    <span class="ticker-item"><span>🇺🇸 WSJ</span> Fed holds rates steady amid trade uncertainty</span>
+    <span class="ticker-item"><span>🇬🇧 FT</span> UK-EU trade talks enter decisive phase</span>
+    <span class="ticker-item"><span>🇫🇷 LeMonde</span> Macron proposes European defence fund</span>
+    <span class="ticker-item"><span>🇩🇪 SpiegelOnl.</span> Berlin coalition crisis deepens</span>
+    <span class="ticker-item"><span>🇪🇸 ElPaís</span> Spain mediates in Western Sahara dispute</span>
+    <span class="ticker-item"><span>🇨🇳 XinhuaNet</span> Beijing rejects new tariff package</span>
+    <span class="ticker-item"><span>🇺🇸 NYT</span> Senate debates foreign aid bill</span>
+    <span class="ticker-item"><span>🇬🇧 Guardian</span> Climate summit stalls on fossil fuel phaseout</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main-layout">
+
+  <!-- HEADER -->
+  <div class="section-header">
+    <div>
+      <div class="section-title" id="mainTitle">World Perspectives</div>
+      <div class="section-subtitle" id="mainSubtitle">Same story. Six lenses. Read the world differently.</div>
+    </div>
+    <div class="topic-chips" id="topicChips">
+      <button class="chip active" onclick="filterTopic(this,'all')">All Topics</button>
+      <button class="chip" onclick="filterTopic(this,'trade')">Trade War</button>
+      <button class="chip" onclick="filterTopic(this,'ukraine')">Ukraine</button>
+      <button class="chip" onclick="filterTopic(this,'mideast')">Middle East</button>
+      <button class="chip" onclick="filterTopic(this,'climate')">Climate</button>
+      <button class="chip" onclick="filterTopic(this,'tech')">Tech Rivalry</button>
+    </div>
+  </div>
+
+  <!-- AD UNIT TOP -->
+  <div class="ad-unit">[ ADVERTISEMENT — 728×90 LEADERBOARD ]</div>
+
+  <!-- STATS BAR -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-num">6</div>
+      <div class="stat-label" id="statSources">Countries</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">42</div>
+      <div class="stat-label" id="statSources2">Sources</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">18</div>
+      <div class="stat-label" id="statStories">Stories Today</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">AI</div>
+      <div class="stat-label" id="statTranslation">Auto-Translation</div>
+    </div>
+  </div>
+
+  <!-- WORLD MAP -->
+  <div class="map-section">
+    <div class="map-header">
+      <div>
+        <div class="map-title" id="mapTitle">Global Hotspots</div>
+        <div class="map-subtitle" id="mapSubtitle">Click a region to filter stories · Pulse = active coverage</div>
+      </div>
+      <div class="map-legend">
+        <div class="legend-item"><span class="legend-dot" style="background:#e74c3c"></span><span id="leg1">High tension</span></div>
+        <div class="legend-item"><span class="legend-dot" style="background:#f39c12"></span><span id="leg2">Developing</span></div>
+        <div class="legend-item"><span class="legend-dot" style="background:#4a8fe8"></span><span id="leg3">Diplomatic</span></div>
+        <div class="legend-item"><span class="legend-dot" style="background:#2ecc71"></span><span id="leg4">Source country</span></div>
+      </div>
+    </div>
+
+    <div class="map-container">
+      <svg id="worldMap" viewBox="0 0 1000 500" preserveAspectRatio="xMidYMid meet">
+        <!-- Ocean background -->
+        <rect width="1000" height="500" fill="#0d1117" rx="8"/>
+        <!-- Grid lines -->
+        <g stroke="#1a1d24" stroke-width="0.5" opacity="0.8">
+          <line x1="0" y1="125" x2="1000" y2="125"/>
+          <line x1="0" y1="250" x2="1000" y2="250"/>
+          <line x1="0" y1="375" x2="1000" y2="375"/>
+          <line x1="250" y1="0" x2="250" y2="500"/>
+          <line x1="500" y1="0" x2="500" y2="500"/>
+          <line x1="750" y1="0" x2="750" y2="500"/>
+        </g>
+
+        <!-- ── CONTINENTS (simplified but recognisable shapes) ── -->
+
+        <!-- North America -->
+        <path class="continent" d="M 85,60 L 160,45 L 220,55 L 240,80 L 230,120 L 210,145 L 195,165 L 180,190 L 165,200 L 150,210 L 140,230 L 125,240 L 110,235 L 95,220 L 80,200 L 70,175 L 65,150 L 60,125 L 65,95 Z" fill="#1a2035" stroke="#252830" stroke-width="1"/>
+        <!-- Central America / Caribbean -->
+        <path d="M 150,230 L 165,240 L 175,255 L 165,265 L 150,260 L 140,250 Z" fill="#1a2035" stroke="#252830" stroke-width="0.8"/>
+
+        <!-- South America -->
+        <path class="continent" d="M 175,265 L 210,255 L 240,260 L 255,280 L 260,310 L 255,345 L 245,375 L 225,400 L 205,415 L 185,420 L 168,410 L 155,390 L 148,365 L 145,340 L 148,310 L 155,285 Z" fill="#1a2035" stroke="#252830" stroke-width="1"/>
+
+        <!-- Europe -->
+        <path class="continent" d="M 440,55 L 480,48 L 510,52 L 525,65 L 520,85 L 505,95 L 495,110 L 480,115 L 465,110 L 450,118 L 435,115 L 425,105 L 428,88 L 435,72 Z" fill="#1a2035" stroke="#252830" stroke-width="1"/>
+        <!-- Iberian -->
+        <path d="M 430,112 L 448,118 L 445,132 L 432,135 L 422,125 L 423,113 Z" fill="#1a2035" stroke="#252830" stroke-width="0.8"/>
+        <!-- UK -->
+        <path d="M 448,68 L 458,64 L 462,75 L 454,82 L 446,78 Z" fill="#1a2035" stroke="#252830" stroke-width="0.8"/>
+        <!-- Scandinavia -->
+        <path d="M 480,35 L 500,28 L 515,38 L 510,55 L 495,60 L 480,55 Z" fill="#1a2035" stroke="#252830" stroke-width="0.8"/>
+
+        <!-- Africa -->
+        <path class="continent" d="M 450,138 L 495,132 L 530,140 L 548,165 L 550,200 L 545,240 L 530,275 L 510,305 L 490,325 L 468,335 L 450,330 L 432,315 L 420,290 L 415,260 L 418,228 L 425,200 L 432,172 L 440,152 Z" fill="#1a2035" stroke="#252830" stroke-width="1"/>
+
+        <!-- Middle East / Arabian Peninsula -->
+        <path class="continent" d="M 548,145 L 580,138 L 605,148 L 615,165 L 608,185 L 590,195 L 568,190 L 550,178 Z" fill="#1a2035" stroke="#252830" stroke-width="0.8"/>
+
+        <!-- Russia / Central Asia -->
+        <path class="continent" d="M 525,30 L 620,20 L 720,25 L 800,35 L 830,55 L 820,80 L 790,90 L 750,88 L 700,92 L 660,88 L 620,90 L 585,95 L 555,88 L 530,75 L 522,55 Z" fill="#1a2035" stroke="#252830" stroke-width="1"/>
+
+        <!-- South Asia / India -->
+        <path d="M 620,138 L 660,132 L 690,145 L 695,175 L 685,205 L 668,220 L 648,218 L 632,200 L 625,175 L 618,155 Z" fill="#1a2035" stroke="#252830" stroke-width="0.8"/>
+
+        <!-- Southeast Asia -->
+        <path d="M 720,155 L 760,148 L 785,162 L 780,188 L 758,198 L 730,192 L 715,175 Z" fill="#1a2035" stroke="#252830" stroke-width="0.8"/>
+
+        <!-- China / East Asia -->
+        <path class="continent" d="M 700,88 L 760,88 L 810,98 L 835,118 L 830,148 L 810,162 L 785,162 L 760,148 L 730,145 L 705,148 L 688,138 L 682,118 L 690,100 Z" fill="#1a2035" stroke="#252830" stroke-width="1"/>
+
+        <!-- Japan -->
+        <path d="M 840,100 L 858,95 L 865,108 L 858,120 L 845,118 L 838,108 Z" fill="#1a2035" stroke="#252830" stroke-width="0.8"/>
+
+        <!-- Australia -->
+        <path class="continent" d="M 780,310 L 840,298 L 890,305 L 918,325 L 920,358 L 905,385 L 875,398 L 840,400 L 808,390 L 785,368 L 775,340 L 775,318 Z" fill="#1a2035" stroke="#252830" stroke-width="1"/>
+
+        <!-- Greenland -->
+        <path d="M 200,18 L 240,12 L 268,20 L 270,42 L 250,52 L 222,48 L 200,35 Z" fill="#1a2035" stroke="#252830" stroke-width="0.8" opacity="0.7"/>
+
+        <!-- ── SOURCE COUNTRIES (highlighted) ── -->
+        <!-- USA -->
+        <path id="hl-usa" class="hl-country" onclick="mapFilterCountry('usa')"
+          d="M 85,60 L 160,45 L 220,55 L 240,80 L 230,120 L 210,145 L 195,165 L 180,190 L 165,200 L 150,210 L 140,230 L 125,240 L 110,235 L 95,220 L 80,200 L 70,175 L 65,150 L 60,125 L 65,95 Z"
+          fill="rgba(192,57,43,0.18)" stroke="#c0392b" stroke-width="1.5"/>
+        <!-- UK -->
+        <path id="hl-uk" class="hl-country" onclick="mapFilterCountry('uk')"
+          d="M 448,68 L 458,64 L 462,75 L 454,82 L 446,78 Z"
+          fill="rgba(41,128,185,0.35)" stroke="#2980b9" stroke-width="1.5"/>
+        <!-- France -->
+        <path id="hl-fr" class="hl-country" onclick="mapFilterCountry('fr')"
+          d="M 448,88 L 468,85 L 478,97 L 472,112 L 455,115 L 442,108 L 440,96 Z"
+          fill="rgba(26,107,181,0.35)" stroke="#1a6bb5" stroke-width="1.5"/>
+        <!-- Germany -->
+        <path id="hl-de" class="hl-country" onclick="mapFilterCountry('de')"
+          d="M 472,72 L 492,70 L 500,82 L 495,96 L 478,97 L 468,85 L 466,75 Z"
+          fill="rgba(243,156,18,0.3)" stroke="#f39c12" stroke-width="1.5"/>
+        <!-- Spain -->
+        <path id="hl-es" class="hl-country" onclick="mapFilterCountry('es')"
+          d="M 430,112 L 448,118 L 445,132 L 432,135 L 422,125 L 423,113 Z"
+          fill="rgba(192,57,43,0.3)" stroke="#e74c3c" stroke-width="1.5"/>
+        <!-- China -->
+        <path id="hl-cn" class="hl-country" onclick="mapFilterCountry('cn')"
+          d="M 700,88 L 760,88 L 810,98 L 835,118 L 830,148 L 810,162 L 785,162 L 760,148 L 730,145 L 705,148 L 688,138 L 682,118 L 690,100 Z"
+          fill="rgba(231,76,60,0.2)" stroke="#e74c3c" stroke-width="1.5"/>
+
+        <!-- ── HOTSPOT MARKERS ── -->
+        <!-- Ukraine hotspot -->
+        <g class="hotspot" onclick="mapGoTo('ukraine')" style="cursor:pointer">
+          <circle cx="530" cy="90" r="14" fill="rgba(231,76,60,0.12)" class="pulse-ring"/>
+          <circle cx="530" cy="90" r="8" fill="rgba(231,76,60,0.25)" class="pulse-ring2"/>
+          <circle cx="530" cy="90" r="5" fill="#e74c3c"/>
+          <text x="530" y="75" text-anchor="middle" fill="#e8eaf0" font-size="9" font-family="DM Mono,monospace" letter-spacing="0.5">UKRAINE</text>
+        </g>
+
+        <!-- Middle East hotspot -->
+        <g class="hotspot" onclick="mapGoTo('mideast')" style="cursor:pointer">
+          <circle cx="578" cy="162" r="14" fill="rgba(231,76,60,0.12)" class="pulse-ring"/>
+          <circle cx="578" cy="162" r="8" fill="rgba(231,76,60,0.22)" class="pulse-ring2"/>
+          <circle cx="578" cy="162" r="5" fill="#e74c3c"/>
+          <text x="578" y="148" text-anchor="middle" fill="#e8eaf0" font-size="9" font-family="DM Mono,monospace" letter-spacing="0.5">MID EAST</text>
+        </g>
+
+        <!-- Taiwan hotspot -->
+        <g class="hotspot" onclick="mapGoTo('tech')" style="cursor:pointer">
+          <circle cx="818" cy="148" r="11" fill="rgba(243,156,18,0.15)" class="pulse-ring"/>
+          <circle cx="818" cy="148" r="6" fill="rgba(243,156,18,0.3)" class="pulse-ring2"/>
+          <circle cx="818" cy="148" r="4" fill="#f39c12"/>
+          <text x="838" y="152" text-anchor="start" fill="#e8eaf0" font-size="9" font-family="DM Mono,monospace" letter-spacing="0.5">TAIWAN</text>
+        </g>
+
+        <!-- Trade War hotspot (Pacific) -->
+        <g class="hotspot" onclick="mapGoTo('trade')" style="cursor:pointer">
+          <circle cx="910" cy="175" r="13" fill="rgba(74,143,232,0.12)" class="pulse-ring"/>
+          <circle cx="910" cy="175" r="7" fill="rgba(74,143,232,0.25)" class="pulse-ring2"/>
+          <circle cx="910" cy="175" r="4" fill="#4a8fe8"/>
+          <text x="910" y="160" text-anchor="middle" fill="#e8eaf0" font-size="9" font-family="DM Mono,monospace" letter-spacing="0.5">TRADE</text>
+        </g>
+
+        <!-- South China Sea -->
+        <g class="hotspot" onclick="mapGoTo('tech')" style="cursor:pointer">
+          <circle cx="778" cy="205" r="10" fill="rgba(243,156,18,0.12)" class="pulse-ring"/>
+          <circle cx="778" cy="205" r="5" fill="rgba(243,156,18,0.28)" class="pulse-ring2"/>
+          <circle cx="778" cy="205" r="3.5" fill="#f39c12"/>
+          <text x="798" y="209" text-anchor="start" fill="#e8eaf0" font-size="8" font-family="DM Mono,monospace">S.CHINA SEA</text>
+        </g>
+
+        <!-- Sahel -->
+        <g class="hotspot" style="cursor:pointer">
+          <circle cx="485" cy="225" r="9" fill="rgba(243,156,18,0.12)" class="pulse-ring"/>
+          <circle cx="485" cy="225" r="4.5" fill="rgba(243,156,18,0.28)" class="pulse-ring2"/>
+          <circle cx="485" cy="225" r="3" fill="#f39c12"/>
+          <text x="500" y="229" text-anchor="start" fill="#e8eaf0" font-size="8" font-family="DM Mono,monospace">SAHEL</text>
+        </g>
+
+        <!-- ── SOURCE COUNTRY LABELS ── -->
+        <text x="148" y="140" text-anchor="middle" fill="#c0392b" font-size="9" font-family="DM Mono,monospace" font-weight="600" opacity="0.9">🇺🇸 USA</text>
+        <text x="453" y="73" text-anchor="middle" fill="#2980b9" font-size="8" font-family="DM Mono,monospace" font-weight="600" opacity="0.9">🇬🇧</text>
+        <text x="460" y="103" text-anchor="middle" fill="#1a6bb5" font-size="8" font-family="DM Mono,monospace" font-weight="600" opacity="0.9">🇫🇷</text>
+        <text x="483" y="87" text-anchor="middle" fill="#f39c12" font-size="8" font-family="DM Mono,monospace" font-weight="600" opacity="0.9">🇩🇪</text>
+        <text x="434" y="128" text-anchor="middle" fill="#e74c3c" font-size="8" font-family="DM Mono,monospace" font-weight="600" opacity="0.9">🇪🇸</text>
+        <text x="760" y="128" text-anchor="middle" fill="#e74c3c" font-size="9" font-family="DM Mono,monospace" font-weight="600" opacity="0.9">🇨🇳 CHINA</text>
+
+        <!-- Equator line -->
+        <line x1="0" y1="268" x2="1000" y2="268" stroke="#1e2230" stroke-width="0.8" stroke-dasharray="4,8"/>
+        <text x="8" y="264" fill="#2a2f3f" font-size="8" font-family="DM Mono,monospace">EQUATOR</text>
+      </svg>
+
+      <!-- Map tooltip -->
+      <div class="map-tooltip" id="mapTooltip"></div>
+
+      <!-- Map controls -->
+      <div class="map-controls">
+        <button class="map-ctrl-btn" id="mapResetBtn" onclick="mapReset()">↺ Reset</button>
+      </div>
+    </div>
+
+    <!-- Country source buttons -->
+    <div class="country-source-row" id="countrySourceRow">
+      <button class="src-btn src-usa" onclick="mapFilterCountry('usa')"><span>🇺🇸</span> USA</button>
+      <button class="src-btn src-uk"  onclick="mapFilterCountry('uk')"><span>🇬🇧</span> UK</button>
+      <button class="src-btn src-fr"  onclick="mapFilterCountry('fr')"><span>🇫🇷</span> France</button>
+      <button class="src-btn src-de"  onclick="mapFilterCountry('de')"><span>🇩🇪</span> Germany</button>
+      <button class="src-btn src-es"  onclick="mapFilterCountry('es')"><span>🇪🇸</span> Spain</button>
+      <button class="src-btn src-cn"  onclick="mapFilterCountry('cn')"><span>🇨🇳</span> China</button>
+    </div>
+  </div>
+
+  <!-- STORIES CONTAINER -->
+  <div id="storiesContainer"></div>
+
+  <!-- AD UNIT MIDDLE -->
+  <div class="ad-unit">[ ADVERTISEMENT — 300×250 RECTANGLE ]</div>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand">PLURIS NEWS</div>
+      <div class="footer-desc" id="footerDesc">Aggregating geopolitical news from six national perspectives. Powered by AI translation. Powered by AI translation · Updated every 30 min.</div>
+    </div>
+    <div>
+      <div class="footer-col-title">Sources</div>
+      <ul class="footer-links">
+        <li><a href="#">🇺🇸 NY Times, WSJ, FP</a></li>
+        <li><a href="#">🇬🇧 FT, Guardian, Economist</a></li>
+        <li><a href="#">🇫🇷 Le Monde, Le Figaro</a></li>
+        <li><a href="#">🇩🇪 Spiegel, FAZ</a></li>
+        <li><a href="#">🇪🇸 El País, El Mundo</a></li>
+        <li><a href="#">🇨🇳 Xinhua, SCMP, GT</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">About</div>
+      <ul class="footer-links">
+        <li><a href="#">How it works</a></li>
+        <li><a href="#">Methodology</a></li>
+        <li><a href="#">Advertise</a></li>
+        <li><a href="#">API Access</a></li>
+        <li><a href="#">Privacy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 PLURIS NEWS — Prototype v0.1</span>
+    <span id="footerTime">Updated: just now</span>
+  </div>
+</footer>
+
+<!-- ARTICLE MODAL -->
+<div class="modal-overlay" id="articleModal" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="document.getElementById('articleModal').classList.remove('open')">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script>
+// ──────────────────────────────
+//  DATA
+// ──────────────────────────────
+const STORIES = [
+  {
+    id: 1,
+    topic: 'trade',
+    icon: '⚖️',
+    category: { en:'TRADE WAR', it:'GUERRA COMMERCIALE', fr:'GUERRE COMMERCIALE', de:'HANDELSKRIEG', es:'GUERRA COMERCIAL', zh:'贸易战' },
+    headline: {
+      en: 'US Tariffs Reshape Global Supply Chains',
+      it: 'I dazi USA ridisegnano le catene del valore globali',
+      fr: 'Les tarifs américains reconfigurent les chaînes mondiales',
+      de: 'US-Zölle formen globale Lieferketten neu',
+      es: 'Los aranceles de EEUU reconfiguran las cadenas globales',
+      zh: '美国关税重塑全球供应链格局'
+    },
+    summary: {
+      en: 'The new tariff package announced by Washington is sending shockwaves through global markets. Six major powers interpret the move through radically different lenses.',
+      it: 'Il nuovo pacchetto di dazi annunciato da Washington scuote i mercati globali. Sei potenze interpretano la mossa in modo radicalmente diverso.',
+      fr: 'Le nouveau paquet de droits de douane annoncé par Washington secoue les marchés mondiaux. Six grandes puissances l\'interprètent différemment.',
+      de: 'Das neue Zollpaket aus Washington erschüttert die Weltmärkte. Sechs Mächte interpretieren den Schritt völlig unterschiedlich.',
+      es: 'El nuevo paquete arancelario anunciado por Washington sacude los mercados globales. Seis potencias lo interpretan de forma radicalmente distinta.',
+      zh: '华盛顿宣布的新一轮关税政策冲击全球市场，六大国对此举有着截然不同的解读。'
+    },
+    cards: [
+      { country:'usa', flag:'🇺🇸', source:'Wall Street Journal', sentiment:'neutral', sentLabel:'ANALYSIS',
+        headline:'Tariffs signal long-term strategic recalibration, not protectionism',
+        excerpt:'The administration frames the measures as necessary corrective tools to address decades of unfair trade practices and intellectual property theft.',
+        time:'2h ago', original:'EN', translated:{it:'Le misure vengono inquadrate come strumenti correttivi necessari per affrontare decenni di pratiche commerciali sleali.', fr:'L\'administration présente ces mesures comme des outils correctifs nécessaires face à des décennies de pratiques commerciales déloyales.', de:'Die Regierung beschreibt die Maßnahmen als notwendige Korrektive gegen jahrzehntelange unlautere Handelspraktiken.', es:'La administración enmarca las medidas como herramientas correctivas necesarias ante décadas de prácticas comerciales desleales.', zh:'政府将这些措施定性为应对数十年不公平贸易行为的必要纠正工具。'} },
+      { country:'uk', flag:'🇬🇧', source:'Financial Times', sentiment:'alarm', sentLabel:'CONCERN',
+        headline:'London warns tariffs risk fragmenting postwar trading order',
+        excerpt:'Britain, still navigating post-Brexit trade alignments, sees the US move as a dangerous precedent that could unravel WTO dispute mechanisms.',
+        time:'3h ago', original:'EN', translated:{it:'La Gran Bretagna vede la mossa degli USA come un precedente pericoloso che potrebbe minare i meccanismi di risoluzione WTO.', fr:'La Grande-Bretagne voit la décision américaine comme un précédent dangereux susceptible de fragiliser les mécanismes de l\'OMC.', de:'Großbritannien sieht den US-Schritt als gefährlichen Präzedenzfall, der die WTO-Streitbeilegungsmechanismen untergraben könnte.', es:'Gran Bretaña ve la acción de EEUU como un precedente peligroso que podría socavar los mecanismos de la OMC.', zh:'英国将美国的行动视为可能动摇世贸组织争端解决机制的危险先例。'} },
+      { country:'fr', flag:'🇫🇷', source:'Le Monde', sentiment:'critical', sentLabel:'CRITIQUE',
+        headline:'Washington joue avec le feu: les alliés paient le prix',
+        excerpt:'Paris souligne que les alliés européens, déjà fragilisés par la guerre en Ukraine, ne peuvent absorber un choc tarifaire supplémentaire sans réponse coordonnée.',
+        time:'4h ago', original:'FR', translated:{en:'Paris stresses that European allies, already weakened by the Ukraine war, cannot absorb an additional tariff shock without a coordinated response.', it:'Parigi sottolinea che gli alleati europei non possono assorbire uno shock tariffario senza una risposta coordinata.', de:'Paris betont, dass europäische Verbündete keinen weiteren Zollschock ohne koordinierte Antwort verkraften können.', es:'París subraya que los aliados europeos no pueden absorber un nuevo choque arancelario sin una respuesta coordinada.', zh:'巴黎强调，已因乌克兰战争而疲弱的欧洲盟友无法在没有协调回应的情况下承受额外的关税冲击。'} },
+      { country:'de', flag:'🇩🇪', source:'Der Spiegel', sentiment:'alarm', sentLabel:'WARNUNG',
+        headline:'Exportweltmeister in der Zange: Berlins Dilemma',
+        excerpt:'Als exportabhängige Volkswirtschaft steht Deutschland zwischen der Loyalität zum NATO-Partner USA und dem wirtschaftlichen Überlebensinteresse seiner Industrie.',
+        time:'5h ago', original:'DE', translated:{en:'As an export-dependent economy, Germany is caught between loyalty to NATO partner USA and the economic survival of its industry.', it:'Come economia dipendente dalle esportazioni, la Germania è stretta tra la lealtà agli USA e la sopravvivenza economica della sua industria.', fr:'En tant qu\'économie dépendante des exportations, l\'Allemagne est prise entre sa loyauté envers les États-Unis et la survie économique de son industrie.', es:'Como economía dependiente de las exportaciones, Alemania está atrapada entre la lealtad a EEUU y la supervivencia económica de su industria.', zh:'作为出口导向型经济体，德国夹在对北约盟友美国的忠诚与本国产业经济生存利益之间。'} },
+      { country:'es', flag:'🇪🇸', source:'El País', sentiment:'neutral', sentLabel:'ANÁLISIS',
+        headline:'España busca su voz propia en la nueva guerra arancelaria',
+        excerpt:'Madrid apuesta por una respuesta europea unificada y ve en la crisis una oportunidad para acelerar la diversificación hacia mercados latinoamericanos.',
+        time:'6h ago', original:'ES', translated:{en:'Madrid backs a unified European response and sees in the crisis an opportunity to accelerate diversification towards Latin American markets.', it:'Madrid sostiene una risposta europea unificata e vede nella crisi un\'opportunità per accelerare la diversificazione verso i mercati latinoamericani.', fr:'Madrid soutient une réponse européenne unifiée et voit dans la crise une opportunité de diversification vers les marchés latino-américains.', de:'Madrid unterstützt eine einheitliche europäische Antwort und sieht in der Krise eine Chance zur Diversifizierung auf lateinamerikanische Märkte.', zh:'马德里支持欧洲统一回应，并将此次危机视为加速向拉丁美洲市场多元化的机遇。'} },
+      { country:'cn', flag:'🇨🇳', source:'Xinhua / Global Times', sentiment:'critical', sentLabel:'批评',
+        headline:'美国关税是单边霸凌行为，中国将采取有力反制措施',
+        excerpt:'北京将新一轮关税定性为违反世贸组织规则的单边主义行为，并表示已准备好采取"全面、对等"的反制措施以维护国家利益。',
+        time:'3h ago', original:'ZH', translated:{en:'Beijing labels the new tariffs as unilateralism violating WTO rules and says it is ready to take "comprehensive and proportionate" countermeasures.', it:'Pechino definisce i nuovi dazi come unilateralismo che viola le regole WTO e dichiara di essere pronta a contromisure "complete e proporzionate".', fr:'Pékin qualifie les nouveaux tarifs d\'unilatéralisme violant les règles de l\'OMC et dit être prêt à prendre des contre-mesures "complètes et proportionnées".', de:'Peking bezeichnet die neuen Zölle als WTO-widrigen Unilateralismus und erklärt sich bereit zu "umfassenden und verhältnismäßigen" Gegenmaßnahmen.', es:'Pekín califica los nuevos aranceles de unilateralismo contrario a las reglas de la OMC y dice estar lista para tomar contramedidas "completas y proporcionales".'} },
+    ]
+  },
+  {
+    id: 2,
+    topic: 'ukraine',
+    icon: '🕊️',
+    category: { en:'UKRAINE WAR', it:'GUERRA IN UCRAINA', fr:'GUERRE EN UKRAINE', de:'UKRAINE-KRIEG', es:'GUERRA EN UCRANIA', zh:'乌克兰战争' },
+    headline: {
+      en: 'Ceasefire Talks: A Fragile Hope or a Tactical Pause?',
+      it: 'Colloqui di pace: speranza fragile o pausa tattica?',
+      fr: 'Pourparlers de cessez-le-feu: espoir fragile ou pause tactique?',
+      de: 'Waffenstillstandsgespräche: Zerbrechliche Hoffnung oder taktische Pause?',
+      es: 'Conversaciones de alto el fuego: ¿esperanza frágil o pausa táctica?',
+      zh: '停火谈判：脆弱的希望还是战术暂停？'
+    },
+    summary: {
+      en: 'Diplomatic signals from Kyiv and Moscow have sparked intense debate. Are these genuine steps toward peace, or calculated maneuvers ahead of a new offensive?',
+      it: 'I segnali diplomatici da Kiev e Mosca hanno acceso il dibattito. Passi genuini verso la pace o manovre calcolate prima di una nuova offensiva?',
+      fr: 'Les signaux diplomatiques de Kiev et Moscou ont suscité un débat intense. Vers la paix ou manœuvre calculée?',
+      de: 'Diplomatische Signale aus Kiew und Moskau haben intensive Debatten entfacht. Echter Friede oder taktisches Manöver?',
+      es: 'Las señales diplomáticas de Kiev y Moscú han desatado un intenso debate. ¿Pasos genuinos hacia la paz o maniobras calculadas?',
+      zh: '来自基辅和莫斯科的外交信号引发激烈争论。这是走向和平的真实步伐，还是新攻势前的战术机动？'
+    },
+    cards: [
+      { country:'usa', flag:'🇺🇸', source:'Foreign Policy', sentiment:'neutral', sentLabel:'ANALYSIS',
+        headline:'Washington cautiously optimistic but demands verified commitments',
+        excerpt:'US officials insist any ceasefire agreement must include robust verification mechanisms and cannot reward territorial gains made by force.',
+        time:'1h ago', original:'EN', translated:{it:'I funzionari USA insistono che qualsiasi accordo di cessate il fuoco deve includere meccanismi di verifica robusti.', fr:'Les responsables américains insistent pour que tout accord de cessez-le-feu comporte des mécanismes de vérification robustes.', de:'US-Beamte bestehen darauf, dass jede Waffenstillstandsvereinbarung robuste Überprüfungsmechanismen beinhalten muss.', es:'Funcionarios de EEUU insisten en que cualquier acuerdo de alto el fuego debe incluir mecanismos de verificación robustos.', zh:'美国官员坚持认为，任何停火协议都必须包含可靠的核查机制。'} },
+      { country:'uk', flag:'🇬🇧', source:'The Guardian', sentiment:'critical', sentLabel:'SKEPTICAL',
+        headline:'Britain warns against any deal that legitimises Russian gains',
+        excerpt:'London voices strong opposition to any framework that could be perceived as rewarding Moscow\'s invasion, stressing continued military support for Ukraine.',
+        time:'2h ago', original:'EN', translated:{it:'Londra esprime forte opposizione a qualsiasi quadro che possa essere percepito come un premio all\'invasione di Mosca.', fr:'Londres exprime sa forte opposition à tout cadre pouvant être perçu comme une récompense pour l\'invasion russe.', de:'London lehnt jeden Rahmen ab, der als Belohnung für Moskaus Invasion wahrgenommen werden könnte.', es:'Londres expresa su fuerte oposición a cualquier marco que pudiera percibirse como una recompensa a la invasión rusa.', zh:'伦敦强烈反对任何可能被视为奖励莫斯科入侵的框架。'} },
+      { country:'fr', flag:'🇫🇷', source:'Le Figaro', sentiment:'positive', sentLabel:'ESPOIR',
+        headline:'Paris mise sur une conférence internationale pour relancer la paix',
+        excerpt:'La France propose d\'accueillir un sommet multilatéral en incluant des acteurs du Sud global, jugés indispensables pour toute solution durable.',
+        time:'4h ago', original:'FR', translated:{en:'France proposes hosting a multilateral summit including actors from the Global South, deemed essential for any lasting solution.', it:'La Francia propone di ospitare un vertice multilaterale includendo attori del Sud globale.', de:'Frankreich schlägt vor, einen multilateralen Gipfel abzuhalten, der Akteure des Globalen Südens einbezieht.', es:'Francia propone albergar una cumbre multilateral que incluya actores del Sur Global.', zh:'法国提议举办多边峰会，纳入被认为对任何持久解决方案不可或缺的全球南方参与方。'} },
+      { country:'de', flag:'🇩🇪', source:'Frankfurter Allgemeine', sentiment:'alarm', sentLabel:'WARNUNG',
+        headline:'Berlin fürchtet: ein schlechter Frieden schlimmer als Krieg',
+        excerpt:'Die Bundesregierung warnt, dass ein vorschneller Frieden ohne echte Sicherheitsgarantien Europa langfristig destabilisieren könnte.',
+        time:'5h ago', original:'DE', translated:{en:'The German government warns that a hasty peace without real security guarantees could destabilise Europe long-term.', it:'Il governo tedesco avverte che una pace affrettata senza reali garanzie di sicurezza potrebbe destabilizzare l\'Europa.', fr:'Le gouvernement allemand avertit qu\'une paix hâtive sans véritables garanties de sécurité pourrait déstabiliser l\'Europe.', es:'El gobierno alemán advierte que una paz precipitada sin garantías de seguridad reales podría desestabilizar Europa.', zh:'德国政府警告称，没有真正安全保障的仓促和平可能从长远看会使欧洲失稳。'} },
+      { country:'es', flag:'🇪🇸', source:'El Mundo', sentiment:'positive', sentLabel:'ESPERANZA',
+        headline:'Madrid aboga por solución diplomática y reconstrucción europea',
+        excerpt:'España enfatiza la necesidad de un plan Marshall moderno para Ucrania y pide un papel más activo de la UE en las negociaciones de paz.',
+        time:'6h ago', original:'ES', translated:{en:'Spain emphasises the need for a modern Marshall Plan for Ukraine and calls for a more active EU role in peace negotiations.', it:'La Spagna sottolinea la necessità di un moderno Piano Marshall per l\'Ucraina.', fr:'L\'Espagne souligne la nécessité d\'un Plan Marshall moderne pour l\'Ukraine.', de:'Spanien betont die Notwendigkeit eines modernen Marshallplans für die Ukraine.', zh:'西班牙强调需要为乌克兰制定现代版马歇尔计划，并呼吁欧盟在和平谈判中发挥更积极的作用。'} },
+      { country:'cn', flag:'🇨🇳', source:'Global Times', sentiment:'neutral', sentLabel:'中立',
+        headline:'中国呼吁各方保持克制，支持通过对话实现持久和平',
+        excerpt:'北京重申其"六点和平提议"，强调任何解决方案都应尊重各方合理安全关切，并反对将乌克兰问题用于地缘政治博弈。',
+        time:'2h ago', original:'ZH', translated:{en:'Beijing reiterates its "six-point peace proposal", stressing any solution must respect legitimate security concerns of all parties.', it:'Pechino ribadisce la sua "proposta di pace in sei punti", sottolineando che qualsiasi soluzione deve rispettare le legittime preoccupazioni di sicurezza di tutte le parti.', fr:'Pékin réitère sa "proposition de paix en six points", soulignant que toute solution doit respecter les préoccupations légitimes de sécurité de toutes les parties.', de:'Peking bekräftigt seinen "Sechs-Punkte-Friedensplan" und betont, dass jede Lösung die legitimen Sicherheitsinteressen aller Parteien berücksichtigen muss.', es:'Pekín reitera su "propuesta de paz de seis puntos", subrayando que cualquier solución debe respetar las preocupaciones de seguridad legítimas de todas las partes.'} },
+    ]
+  },
+  {
+    id: 3,
+    topic: 'tech',
+    icon: '💻',
+    category: { en:'TECH RIVALRY', it:'RIVALITÀ TECH', fr:'RIVALITÉ TECHNOLOGIQUE', de:'TECH-RIVALITÄT', es:'RIVALIDAD TECNOLÓGICA', zh:'科技竞争' },
+    headline: {
+      en: 'The Semiconductor War: Who Controls the Chips Controls the Future',
+      it: 'La guerra dei semiconduttori: chi controlla i chip controlla il futuro',
+      fr: 'La guerre des semi-conducteurs: qui contrôle les puces contrôle l\'avenir',
+      de: 'Der Halbleiterkrieg: Wer die Chips kontrolliert, kontrolliert die Zukunft',
+      es: 'La guerra de semiconductores: quien controla los chips controla el futuro',
+      zh: '半导体战争：谁控制芯片，谁就控制未来'
+    },
+    summary: {
+      en: 'New US export restrictions on advanced semiconductors are tightening the global tech cold war. Each major power is racing to achieve strategic autonomy in chip production.',
+      it: 'Le nuove restrizioni all\'export USA sui semiconduttori avanzati inaspriscono la guerra fredda tecnologica globale.',
+      fr: 'Les nouvelles restrictions américaines à l\'exportation de semi-conducteurs avancés intensifient la guerre froide technologique mondiale.',
+      de: 'Neue US-Exportbeschränkungen für fortgeschrittene Halbleiter verschärfen den globalen technologischen Kalten Krieg.',
+      es: 'Las nuevas restricciones de exportación de EEUU sobre semiconductores avanzados intensifican la guerra fría tecnológica global.',
+      zh: '美国对先进半导体新出口限制正加剧全球科技冷战，各主要大国竞相实现芯片生产战略自主。'
+    },
+    cards: [
+      { country:'usa', flag:'🇺🇸', source:'New York Times', sentiment:'neutral', sentLabel:'ANALYSIS',
+        headline:'Export controls are the new sanctions — and far more powerful',
+        excerpt:'Washington views semiconductor supremacy as the defining geopolitical battleground of the 21st century, surpassing oil and finance in strategic importance.',
+        time:'30m ago', original:'EN', translated:{it:'Washington considera la supremazia sui semiconduttori come il campo di battaglia geopolitico più importante del XXI secolo.', fr:'Washington considère la suprématie des semi-conducteurs comme le champ de bataille géopolitique déterminant du XXIe siècle.', de:'Washington betrachtet die Halbleitervorherrschaft als das entscheidende geopolitische Schlachtfeld des 21. Jahrhunderts.', es:'Washington considera la supremacía en semiconductores como el campo de batalla geopolítico definitorio del siglo XXI.', zh:'华盛顿将半导体霸权视为21世纪决定性的地缘政治战场，其战略重要性超过石油和金融。'} },
+      { country:'uk', flag:'🇬🇧', source:'The Economist', sentiment:'positive', sentLabel:'BACKING',
+        headline:'Britain bets on chip sovereignty through ARIA and TSMC partnership',
+        excerpt:'London\'s approach combines attracting foreign fab investment with domestic R&D funding, positioning the UK as Europe\'s preferred semiconductor hub.',
+        time:'1h ago', original:'EN', translated:{it:'Londra combina l\'attrazione di investimenti stranieri con finanziamenti domestici per R&D, posizionando il UK come hub preferito per i semiconduttori in Europa.', fr:'Londres combine l\'attraction d\'investissements étrangers avec le financement domestique de R&D, positionnant le Royaume-Uni comme hub préféré de semi-conducteurs en Europe.', de:'London kombiniert die Anziehung ausländischer Investitionen mit inländischer F&E-Finanzierung.', es:'Londres combina atraer inversiones extranjeras con financiación doméstica de I+D, posicionando al Reino Unido como hub preferido de semiconductores en Europa.', zh:'伦敦将吸引外资与国内研发资金相结合，将英国定位为欧洲首选半导体中心。'} },
+      { country:'fr', flag:'🇫🇷', source:'Les Échos', sentiment:'alarm', sentLabel:'ALERTE',
+        headline:'L\'Europe dépendante: le plan chips à la traîne face à la réalité',
+        excerpt:'Malgré le European Chips Act, l\'UE peine à atteindre ses objectifs de production. Paris appelle à une stratégie industrielle plus offensive.',
+        time:'3h ago', original:'FR', translated:{en:'Despite the European Chips Act, the EU struggles to reach its production targets. Paris calls for a more offensive industrial strategy.', it:'Nonostante lo European Chips Act, l\'UE fatica a raggiungere i suoi obiettivi di produzione.', de:'Trotz des European Chips Act kämpft die EU darum, ihre Produktionsziele zu erreichen.', es:'A pesar del European Chips Act, la UE lucha por alcanzar sus objetivos de producción.', zh:'尽管有《欧洲芯片法》，欧盟仍难以实现其生产目标。巴黎呼吁采取更具进攻性的产业战略。'} },
+      { country:'de', flag:'🇩🇪', source:'Handelsblatt', sentiment:'positive', sentLabel:'CHANCEN',
+        headline:'Intel in Magdeburg: Deutschlands Wette auf die Chipzukunft',
+        excerpt:'Trotz Verzögerungen sieht Berlin den Intel-Standort als Anker einer neuen deutschen Industriepolitik — und als Blaupause für europäische Souveränität.',
+        time:'4h ago', original:'DE', translated:{en:'Despite delays, Berlin sees the Intel site as anchor of a new German industrial policy and as a blueprint for European sovereignty.', it:'Nonostante i ritardi, Berlino vede il sito Intel come ancora di una nuova politica industriale tedesca.', fr:'Malgré les retards, Berlin voit le site Intel comme l\'ancre d\'une nouvelle politique industrielle allemande.', es:'A pesar de los retrasos, Berlín ve el sitio de Intel como ancla de una nueva política industrial alemana.', zh:'尽管存在延误，柏林将英特尔工厂视为新德国产业政策的支柱和欧洲主权的蓝图。'} },
+      { country:'es', flag:'🇪🇸', source:'El País Tecnología', sentiment:'neutral', sentLabel:'ANÁLISIS',
+        headline:'España apuesta por el diseño de chips y la IA como nicho propio',
+        excerpt:'Sin capacidad de fabricación masiva, Madrid enfoca su estrategia en el diseño de semiconductores especializados y la cadena de valor de la IA.',
+        time:'5h ago', original:'ES', translated:{en:'Without mass manufacturing capacity, Madrid focuses its strategy on specialised semiconductor design and the AI value chain.', it:'Senza capacità di produzione di massa, Madrid concentra la sua strategia sul design di semiconduttori specializzati.', fr:'Sans capacité de fabrication de masse, Madrid concentre sa stratégie sur la conception de semi-conducteurs spécialisés.', de:'Ohne Massenfertigungskapazitäten konzentriert Madrid seine Strategie auf spezialisiertes Halbleiterdesign.', zh:'在缺乏大规模制造能力的情况下，马德里将战略重点放在专业半导体设计和人工智能价值链上。'} },
+      { country:'cn', flag:'🇨🇳', source:'South China Morning Post', sentiment:'critical', sentLabel:'突破',
+        headline:'华为突破封锁：7nm芯片量产标志中国技术独立新阶段',
+        excerpt:'华为麒麟芯片的成功量产被视为中国半导体自主研发的重大突破，尽管与台积电最先进工艺仍存在差距，但已证明封锁政策效果有限。',
+        time:'1h ago', original:'ZH', translated:{en:'Huawei\'s successful mass production of its Kirin chip is seen as a major breakthrough in China\'s semiconductor self-reliance, despite remaining gaps vs. TSMC\'s leading edge.', it:'La produzione di massa del chip Kirin di Huawei è vista come una grande svolta nell\'autonomia dei semiconduttori cinesi.', fr:'La production en masse du chip Kirin de Huawei est considérée comme une percée majeure dans l\'autonomie des semi-conducteurs chinois.', de:'Huaweis Massenproduktion des Kirin-Chips gilt als großer Durchbruch in Chinas Halbleiter-Selbstständigkeit.', es:'La producción masiva del chip Kirin de Huawei se considera un gran avance en la autosuficiencia de semiconductores de China.'} },
+    ]
+  }
+];
+
+// ──────────────────────────────
+//  STATE
+// ──────────────────────────────
+let currentLang = 'en';
+let currentTopic = 'all';
+
+// ──────────────────────────────
+//  I18N
+// ──────────────────────────────
+const UI = {
+  en: { mainTitle:'World Perspectives', mainSubtitle:'Same story. Six lenses. Read the world differently.', tickerLabel:'BREAKING', liveLabel:'LIVE', translateBtn:'✦ Translate', translating:'...', showOriginal:'Show original', statSources:'Countries', statSources2:'Sources', statStories:'Stories Today', statTranslation:'Auto-Translation', perspectivesLabel:'PERSPECTIVES', footerDesc:'Aggregating geopolitical news from six national perspectives. Powered by AI translation. Updated every 30 min.', footerTime:'Updated: just now', allTopics:'All Topics', tradeWar:'Trade War', ukraine:'Ukraine', mideast:'Middle East', climate:'Climate', techRival:'Tech Rivalry' },
+  it: { mainTitle:'Prospettive Mondiali', mainSubtitle:'La stessa storia. Sei obiettivi. Leggi il mondo diversamente.', tickerLabel:'ULTIME', liveLabel:'LIVE', translateBtn:'✦ Traduci', translating:'...', showOriginal:'Mostra originale', statSources:'Paesi', statSources2:'Fonti', statStories:'Notizie Oggi', statTranslation:'Traduzione AI', perspectivesLabel:'PROSPETTIVE', footerDesc:'Aggrega notizie geopolitiche da sei prospettive nazionali. Traduzione AI. Aggiornato ogni 30 min.', footerTime:'Aggiornato: adesso', allTopics:'Tutti i temi', tradeWar:'Guerra Commerciale', ukraine:'Ucraina', mideast:'Medio Oriente', climate:'Clima', techRival:'Rivalità Tech' },
+  fr: { mainTitle:'Perspectives Mondiales', mainSubtitle:'La même histoire. Six objectifs. Lisez le monde différemment.', tickerLabel:'BREAKING', liveLabel:'EN DIRECT', translateBtn:'✦ Traduire', translating:'...', showOriginal:'Voir original', statSources:'Pays', statSources2:'Sources', statStories:'Articles Aujourd\'hui', statTranslation:'Traduction IA', perspectivesLabel:'PERSPECTIVES', footerDesc:'Agrège les actualités géopolitiques de six perspectives nationales. Traduction IA. Mis à jour toutes les 30 min.', footerTime:'Mis à jour: à l\'instant', allTopics:'Tous les sujets', tradeWar:'Guerre commerciale', ukraine:'Ukraine', mideast:'Moyen-Orient', climate:'Climat', techRival:'Rivalité Tech' },
+  de: { mainTitle:'Weltperspektiven', mainSubtitle:'Dieselbe Geschichte. Sechs Linsen. Lesen Sie die Welt anders.', tickerLabel:'AKTUELL', liveLabel:'LIVE', translateBtn:'✦ Übersetzen', translating:'...', showOriginal:'Original anzeigen', statSources:'Länder', statSources2:'Quellen', statStories:'Artikel Heute', statTranslation:'KI-Übersetzung', perspectivesLabel:'PERSPEKTIVEN', footerDesc:'Aggregiert geopolitische Nachrichten aus sechs nationalen Perspektiven. KI-Übersetzung. Alle 30 Min aktualisiert.', footerTime:'Aktualisiert: gerade eben', allTopics:'Alle Themen', tradeWar:'Handelskrieg', ukraine:'Ukraine', mideast:'Naher Osten', climate:'Klima', techRival:'Tech-Rivalität' },
+  es: { mainTitle:'Perspectivas Mundiales', mainSubtitle:'La misma historia. Seis objetivos. Lee el mundo de forma diferente.', tickerLabel:'ÚLTIMA HORA', liveLabel:'EN VIVO', translateBtn:'✦ Traducir', translating:'...', showOriginal:'Ver original', statSources:'Países', statSources2:'Fuentes', statStories:'Artículos Hoy', statTranslation:'Traducción IA', perspectivesLabel:'PERSPECTIVAS', footerDesc:'Agrega noticias geopolíticas desde seis perspectivas nacionales. Traducción IA. Actualizado cada 30 min.', footerTime:'Actualizado: ahora mismo', allTopics:'Todos los temas', tradeWar:'Guerra Comercial', ukraine:'Ucrania', mideast:'Oriente Medio', climate:'Clima', techRival:'Rivalidad Tech' },
+  zh: { mainTitle:'全球视角', mainSubtitle:'同一故事，六种视角，以不同方式读懂世界。', tickerLabel:'突发新闻', liveLabel:'实时', translateBtn:'✦ 翻译', translating:'...', showOriginal:'显示原文', statSources:'国家', statSources2:'来源', statStories:'今日文章', statTranslation:'AI翻译', perspectivesLabel:'视角', footerDesc:'汇聚来自六个国家视角的地缘政治新闻。AI翻译驱动，每30分钟自动更新。', footerTime:'刚刚更新', allTopics:'所有主题', tradeWar:'贸易战', ukraine:'乌克兰', mideast:'中东', climate:'气候', techRival:'科技竞争' }
+};
+
+const COUNTRY_COLORS = { usa:'#c0392b', uk:'#2980b9', fr:'#1a6bb5', de:'#f39c12', es:'#c0392b', cn:'#e74c3c' };
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase() === lang || (lang==='zh' && b.textContent==='中')));
+  const ui = UI[lang];
+  document.getElementById('mainTitle').textContent = ui.mainTitle;
+  document.getElementById('mainSubtitle').textContent = ui.mainSubtitle;
+  document.getElementById('tickerLabel').textContent = ui.tickerLabel;
+  document.getElementById('liveLabel').textContent = ui.liveLabel;
+  document.getElementById('statSources').textContent = ui.statSources;
+  document.getElementById('statSources2').textContent = ui.statSources2;
+  document.getElementById('statStories').textContent = ui.statStories;
+  document.getElementById('statTranslation').textContent = ui.statTranslation;
+  document.getElementById('footerDesc').textContent = ui.footerDesc;
+  document.getElementById('footerTime').textContent = ui.footerTime;
+  const chips = document.querySelectorAll('#topicChips .chip');
+  const labels = [ui.allTopics, ui.tradeWar, ui.ukraine, ui.mideast, ui.climate, ui.techRival];
+  chips.forEach((c,i) => c.textContent = labels[i]);
+  updateMapLabels();
+  renderStories();
+}
+
+// ──────────────────────────────
+//  RENDER
+// ──────────────────────────────
+function renderStories() {
+  const container = document.getElementById('storiesContainer');
+  const ui = UI[currentLang];
+  const filtered = currentTopic === 'all' ? STORIES : STORIES.filter(s => s.topic === currentTopic);
+  container.innerHTML = filtered.map((story, si) => `
+    <div class="story-header" data-topic="${story.topic}">
+      <div class="story-icon">${story.icon}</div>
+      <div class="story-meta">
+        <div class="story-category">${story.category[currentLang] || story.category.en}</div>
+        <div class="story-headline">${story.headline[currentLang] || story.headline.en}</div>
+        <div class="story-summary">${story.summary[currentLang] || story.summary.en}</div>
+      </div>
+    </div>
+    <div class="perspectives-label">${ui.perspectivesLabel}</div>
+    <div class="perspectives-grid">
+      ${story.cards.map((c, ci) => renderCard(c, story.id, ci, ui)).join('')}
+    </div>
+    ${si < filtered.length - 1 ? `<hr class="story-divider" data-n="···">` : ''}
+  `).join('');
+}
+
+function renderCard(card, storyId, cardIdx, ui) {
+  const color = COUNTRY_COLORS[card.country] || '#888';
+  const cardId = `card-${storyId}-${cardIdx}`;
+  const showTranslate = card.original !== currentLang.toUpperCase() && card.translated && card.translated[currentLang];
+  return `
+  <div class="perspective-card" style="--card-accent:${color}" id="${cardId}">
+    <div class="card-top">
+      <div class="flag">${card.flag}</div>
+      <div class="source-info">
+        <div class="source-name">${card.source}</div>
+        <div class="source-country">${card.original} original</div>
+      </div>
+      <div class="sentiment-badge ${getSentClass(card.sentiment)}">${card.sentLabel}</div>
+    </div>
+    <div class="card-headline">${card.headline}</div>
+    <div class="card-excerpt">${card.excerpt}</div>
+    ${showTranslate ? `<div class="translated-text" id="tr-${cardId}">${card.translated[currentLang]}</div>` : ''}
+    <div class="card-footer">
+      <div class="card-time">${card.time}</div>
+      ${showTranslate ? `<button class="translate-btn" id="btn-${cardId}" onclick="toggleTranslate('${cardId}', this)">${ui.translateBtn}</button>` : ''}
+    </div>
+  </div>`;
+}
+
+function getSentClass(s) {
+  return { critical:'sent-critical', neutral:'sent-neutral', positive:'sent-positive', alarm:'sent-alarm' }[s] || 'sent-neutral';
+}
+
+function toggleTranslate(cardId, btn) {
+  const tr = document.getElementById('tr-' + cardId);
+  if (!tr) return;
+  const isVisible = tr.classList.contains('visible');
+  if (isVisible) {
+    tr.classList.remove('visible');
+    btn.textContent = UI[currentLang].translateBtn;
+  } else {
+    btn.textContent = UI[currentLang].translating;
+    btn.classList.add('loading');
+    setTimeout(() => {
+      tr.classList.add('visible');
+      btn.textContent = UI[currentLang].showOriginal;
+      btn.classList.remove('loading');
+    }, 600);
+  }
+}
+
+function filterTopic(el, topic) {
+  currentTopic = topic;
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  renderStories();
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('articleModal'))
+    document.getElementById('articleModal').classList.remove('open');
+}
+
+// ──────────────────────────────
+//  MAP LOGIC
+// ──────────────────────────────
+const MAP_COUNTRIES = {
+  usa: { label:'🇺🇸 United States', stories:3, sources:'WSJ · NYT · Foreign Policy' },
+  uk:  { label:'🇬🇧 United Kingdom', stories:3, sources:'FT · Guardian · Economist' },
+  fr:  { label:'🇫🇷 France',         stories:3, sources:'Le Monde · Le Figaro · Les Échos' },
+  de:  { label:'🇩🇪 Germany',        stories:3, sources:'Spiegel · FAZ · Handelsblatt' },
+  es:  { label:'🇪🇸 Spain',          stories:3, sources:'El País · El Mundo' },
+  cn:  { label:'🇨🇳 China',          stories:3, sources:'Xinhua · Global Times · SCMP' }
+};
+
+const MAP_TOPICS = {
+  ukraine: 'ukraine',
+  mideast: 'mideast',
+  tech:    'tech',
+  trade:   'trade'
+};
+
+const MAP_LABELS = {
+  en:{ mapTitle:'Global Hotspots', mapSubtitle:'Click a region to filter stories · Pulse = active coverage', leg1:'High tension', leg2:'Developing', leg3:'Diplomatic', leg4:'Source country' },
+  it:{ mapTitle:'Punti Caldi Globali', mapSubtitle:'Clicca una regione per filtrare · Pulsante = copertura attiva', leg1:'Alta tensione', leg2:'In sviluppo', leg3:'Diplomatico', leg4:'Paese fonte' },
+  fr:{ mapTitle:'Points Chauds Mondiaux', mapSubtitle:'Cliquez une région pour filtrer · Pulsation = couverture active', leg1:'Haute tension', leg2:'En développement', leg3:'Diplomatique', leg4:'Pays source' },
+  de:{ mapTitle:'Globale Brennpunkte', mapSubtitle:'Region anklicken zum Filtern · Puls = aktive Berichterstattung', leg1:'Hohe Spannung', leg2:'Sich entwickelnd', leg3:'Diplomatisch', leg4:'Quellenland' },
+  es:{ mapTitle:'Puntos Calientes Globales', mapSubtitle:'Haz clic en una región para filtrar · Pulso = cobertura activa', leg1:'Alta tensión', leg2:'En desarrollo', leg3:'Diplomático', leg4:'País fuente' },
+  zh:{ mapTitle:'全球热点地区', mapSubtitle:'点击区域筛选报道 · 脉冲 = 活跃报道', leg1:'高度紧张', leg2:'持续发展', leg3:'外交', leg4:'来源国家' }
+};
+
+let activeMapCountry = null;
+
+function updateMapLabels() {
+  const ml = MAP_LABELS[currentLang] || MAP_LABELS.en;
+  const el = id => document.getElementById(id);
+  if(el('mapTitle'))    el('mapTitle').textContent    = ml.mapTitle;
+  if(el('mapSubtitle')) el('mapSubtitle').textContent = ml.mapSubtitle;
+  if(el('leg1')) el('leg1').textContent = ml.leg1;
+  if(el('leg2')) el('leg2').textContent = ml.leg2;
+  if(el('leg3')) el('leg3').textContent = ml.leg3;
+  if(el('leg4')) el('leg4').textContent = ml.leg4;
+}
+
+function id(x){ return document.getElementById(x); }
+
+function mapFilterCountry(country) {
+  // Toggle: clicking same country twice resets
+  if (activeMapCountry === country) { mapReset(); return; }
+  activeMapCountry = country;
+
+  // Highlight SVG
+  document.querySelectorAll('.hl-country').forEach(el => el.classList.remove('active-country'));
+  const hlEl = document.getElementById('hl-' + country);
+  if (hlEl) hlEl.classList.add('active-country');
+
+  // Source buttons
+  document.querySelectorAll('.src-btn').forEach(b => b.classList.remove('active'));
+  const srcBtn = document.querySelector('.src-' + country);
+  if (srcBtn) srcBtn.classList.add('active');
+
+  // Filter: show all stories but highlight cards from this country
+  currentTopic = 'all';
+  document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+  document.querySelector('.chip')?.classList.add('active');
+  renderStories();
+
+  // After render, dim cards not from this country
+  setTimeout(() => {
+    document.querySelectorAll('.perspective-card').forEach(card => {
+      const isMatch = card.querySelector('.source-name') &&
+        STORIES.some(s => s.cards.some(c => c.country === country &&
+          card.querySelector('.source-name')?.textContent === c.source));
+      card.style.opacity = isMatch ? '1' : '0.35';
+      card.style.transform = isMatch ? 'none' : 'scale(0.98)';
+      card.style.transition = 'opacity 0.3s, transform 0.3s';
+    });
+
+    // Highlight matching cards
+    document.querySelectorAll('.perspective-card').forEach(card => {
+      const sourceName = card.querySelector('.source-name')?.textContent;
+      const matched = STORIES.some(s => s.cards.some(c =>
+        c.country === country && c.source === sourceName));
+      if (matched) {
+        card.style.opacity = '1';
+        card.style.boxShadow = `0 0 0 1.5px ${COUNTRY_COLORS[country]}44, 0 6px 24px rgba(0,0,0,0.4)`;
+      }
+    });
+  }, 60);
+
+  // Scroll to stories
+  id('storiesContainer')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function mapGoTo(topic) {
+  currentTopic = topic;
+  document.querySelectorAll('.chip').forEach(c => {
+    const topicMap = { trade:'tradeWar', ukraine:'ukraine', mideast:'mideast', climate:'climate', tech:'techRival', all:'allTopics' };
+    const key = topicMap[topic];
+    const ui = UI[currentLang];
+    c.classList.toggle('active', c.textContent === (ui[key] || key));
+  });
+  mapReset(false);
+  renderStories();
+  id('storiesContainer')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function mapReset(rerenderStories = true) {
+  activeMapCountry = null;
+  document.querySelectorAll('.hl-country').forEach(el => el.classList.remove('active-country'));
+  document.querySelectorAll('.src-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.perspective-card').forEach(card => {
+    card.style.opacity = '';
+    card.style.transform = '';
+    card.style.boxShadow = '';
+  });
+  if(rerenderStories){ currentTopic = 'all'; renderStories(); }
+}
+
+// ──────────────────────────────
+//  LIVE DATA LOADER
+// ──────────────────────────────
+// Percorso del JSON generato dallo script Python via GitHub Actions
+const NEWS_JSON_URL = '../data/news.json';
+// Ogni quanti ms ricontrollare (15 minuti)
+const REFRESH_MS = 15 * 60 * 1000;
+
+function showLoadingState() {
+  const c = document.getElementById('storiesContainer');
+  c.innerHTML = `
+    <div style="padding:60px 0; text-align:center;">
+      <div style="font-family:var(--mono);font-size:12px;color:var(--text3);letter-spacing:2px;margin-bottom:16px">
+        LOADING LIVE NEWS...
+      </div>
+      <div style="display:flex;gap:8px;justify-content:center">
+        ${[0,1,2].map(i=>`<div class="skeleton" style="width:260px;height:160px;border-radius:8px;animation-delay:${i*0.15}s"></div>`).join('')}
+      </div>
+    </div>`;
+}
+
+function showErrorState(msg) {
+  const c = document.getElementById('storiesContainer');
+  c.innerHTML = `
+    <div style="padding:60px 0;text-align:center;font-family:var(--mono);font-size:12px;color:var(--text3)">
+      <div style="font-size:28px;margin-bottom:12px">📡</div>
+      Using demo data — ${msg}<br>
+      <span style="color:var(--text2);margin-top:8px;display:block">Live data loads automatically every 30 min via GitHub Actions</span>
+    </div>`;
+  setTimeout(() => renderStories(), 1200);
+}
+
+async function loadLiveData() {
+  showLoadingState();
+  try {
+    const res = await fetch(NEWS_JSON_URL + '?t=' + Date.now());
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+
+    if (!data.stories || Object.keys(data.stories).length === 0) {
+      throw new Error('empty feed');
+    }
+
+    // Converti da {topic: storyObj} a array come STORIES
+    const liveStories = Object.values(data.stories);
+    STORIES.length = 0;
+    liveStories.forEach((s, i) => {
+      // Normalizza per compatibilità col renderCard esistente
+      s.id = i + 1;
+      STORIES.push(s);
+    });
+
+    // Aggiorna stats bar
+    const totalCards = liveStories.reduce((acc, s) => acc + (s.cards?.length || 0), 0);
+    document.querySelector('#statStories')?.closest('.stat-item')
+      ?.querySelector('.stat-num')?.textContent !== undefined &&
+      (document.querySelectorAll('.stat-num')[2].textContent = totalCards);
+
+    // Aggiorna timestamp footer
+    if (data.updated) {
+      const d = new Date(data.updated);
+      const label = UI[currentLang]?.footerTime?.split(':')[0] || 'Updated';
+      document.getElementById('footerTime').textContent =
+        label + ': ' + d.toLocaleTimeString([], {hour:'2-digit',minute:'2-digit'});
+    }
+
+    renderStories();
+    console.log(`✅ Live data loaded: ${liveStories.length} stories, ${totalCards} cards`);
+
+  } catch (err) {
+    console.warn('Live data unavailable, using demo data:', err.message);
+    showErrorState(err.message);
+  }
+}
+
+// ──────────────────────────────
+//  INIT
+// ──────────────────────────────
+updateMapLabels();
+
+// Prova a caricare dati live; fallback ai dati demo se fallisce
+loadLiveData();
+
+// Ricarica ogni 15 minuti senza refresh della pagina
+setInterval(loadLiveData, REFRESH_MS);
+
+// Live clock
+setInterval(() => {
+  const now = new Date();
+  document.getElementById('footerTime').textContent =
+    (UI[currentLang].footerTime.split(':')[0] || 'Updated') + ': ' + now.toLocaleTimeString();
+}, 60000);
+</script>
+</body>
+</html>
