@@ -18,7 +18,12 @@ jobs:
         with:
           python-version: '3.11'
 
-      - run: pip install anthropic
+run: |
+          if [ -f scripts/fetch_news.py ]; then
+            python scripts/fetch_news.py
+          else
+            python fetch_news.py
+          fi
 
       - name: Run news fetcher
         env:
