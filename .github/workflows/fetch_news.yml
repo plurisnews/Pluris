@@ -18,20 +18,20 @@ jobs:
         with:
           python-version: '3.11'
 
-run: |
+      - run: pip install anthropic
+
+      - name: Run news fetcher
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
           if [ -f scripts/fetch_news.py ]; then
             python scripts/fetch_news.py
           else
             python fetch_news.py
           fi
 
-      - name: Run news fetcher
-        env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-        run: python scripts/fetch_news.py
-
       - name: Push changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "🌍 Update news"
-          file_pattern: data/news.json
+          file_pattern: data/news.json public/data/news.json
